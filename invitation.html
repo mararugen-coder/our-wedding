@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You are Invited — Celebrating the Giglios</title>
+    <!-- Premium Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     
     <link rel="icon" href="favicon-black.png" type="image/png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="favicon-white.png" type="image/png" media="(prefers-color-scheme: dark)">
 
+    <!-- Force the browser back to the top of the page on reload to prevent auto-scrolling issues -->
     <script>
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
@@ -67,7 +69,7 @@
         }
 
         /* ----------------------------------------------------
-           THE ENVELOPE (MATTE SLATE BLUE & ROUNDED & SOFT SHADOW)
+           THE ENVELOPE (MATTE SLATE BLUE & GOLD FOIL TRIMMED)
            ---------------------------------------------------- */
         .envelope-wrapper {
             position: relative;
@@ -77,6 +79,10 @@
             border-radius: 12px; /* Softened organic corners */
             margin-top: 60px;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            /* Gold foil border outlining the entire rectangular envelope container */
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%) 1;
             
             /* Realistic soft, deep floating shadow under the whole envelope structure */
             filter: drop-shadow(0 25px 35px rgba(44, 62, 80, 0.25));
@@ -95,8 +101,10 @@
                         linear-gradient(45deg, #2c3e50 50%, transparent 50%),
                         linear-gradient(to top, #34495e 30%, #3d566e 100%);
             z-index: 3; /* Keeps envelope front pockets stacked completely over the card */
-            border-radius: 12px; /* Matches outer container radius */
-            border-bottom: 2px solid rgba(219, 183, 108, 0.25); /* Subtle gold foil baseline trim */
+            border-radius: 10px; /* Matches slightly inside outer container radius */
+            
+            /* Elegant gold foil trim outlining the top edges of the lower overlapping fold pocket lines */
+            border-bottom: 2px solid rgba(219, 183, 108, 0.35); 
         }
 
         /* The Top Open Flap (Slate Blue interior, Gold foil outer peak trim) */
@@ -117,7 +125,7 @@
             border-radius: 8px 8px 0 0; /* Rounds the top folding point of the lid */
         }
 
-        /* Gold foil edge line on the inner lip of the opening flap */
+        /* Gold foil edge line on the outer lip of the opening flap */
         .envelope-flap::after {
             content: '';
             position: absolute;
@@ -127,53 +135,14 @@
             height: 0;
             border-left: 230px solid transparent;
             border-right: 230px solid transparent;
-            border-top: 180px solid rgba(219, 183, 108, 0.4);
+            border-top: 180px solid rgba(219, 183, 108, 0.6); /* Vibrant gold foil accent */
             z-index: -1;
             transform: scale(0.982) translateY(-2px);
             border-radius: 8px 8px 0 0;
         }
 
         /* ----------------------------------------------------
-           THE DYNAMIC ORGANIC GOLD WAX SEAL
-           ---------------------------------------------------- */
-        .wax-seal {
-            position: absolute;
-            top: 180px; /* Sits precisely at the vertex center of the triangular lid */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 62px;
-            height: 62px;
-            /* Premium metallic gold molten texture gradient */
-            background: radial-gradient(circle, #ffe180 0%, #d4af37 40%, #bf953f 80%, #8c6a21 100%);
-            /* Highly irregular, organic, hand-pressed circular border edges */
-            border-radius: 48% 52% 46% 54% / 54% 47% 53% 46%;
-            z-index: 5; /* Forces the seal to sit completely on top of closed flaps */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: none;
-            will-change: opacity, transform;
-            
-            /* Realistic deep wax shadows */
-            box-shadow: 
-                inset 0 2px 4px rgba(255, 255, 255, 0.5), 
-                inset 0 -3px 5px rgba(0, 0, 0, 0.2),
-                0 6px 15px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Fancy elegant serif Monogram 'G' engraving inner stamp */
-        .wax-seal::after {
-            content: 'G';
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.3rem;
-            font-weight: 300;
-            font-style: italic;
-            color: #4a340b; /* Burnished dark gold imprint shadow contrast */
-            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
-        }
-
-        /* ----------------------------------------------------
-           THE WEDDING INVITATION CARD (GOLD FOIL + FLORAL INNER)
+           THE WEDDING INVITATION CARD (GOLD FOIL INNER)
            ---------------------------------------------------- */
         .invitation-card {
             position: absolute;
@@ -308,14 +277,6 @@
                 top: -127px;
                 left: -160px;
             }
-            .wax-seal {
-                top: 125px; /* Re-centers wax seal to meet flap tip on mobile scale */
-                width: 48px;
-                height: 48px;
-            }
-            .wax-seal::after {
-                font-size: 1.7rem;
-            }
             .invitation-card {
                 width: 290px;
                 height: 215px;
@@ -332,14 +293,17 @@
 </head>
 <body>
 
+    <!-- Main 3D Simulation Viewport -->
     <div class="invite-viewport-scene">
         
+        <!-- The Envelope Container -->
         <div class="envelope-wrapper" id="envelopeContainer">
+            <!-- The Top Lid Flap -->
             <div class="envelope-flap" id="envelopeLid"></div>
-
-            <div class="wax-seal" id="waxSeal"></div>
             
+            <!-- Invitation Card Insert (Tucked securely inside, shorter than envelope) -->
             <div class="invitation-card" id="inviteCard">
+                <!-- Outer Metallic Foil Gold Border Frame -->
                 <div class="gold-foil-border"></div>
 
                 <div class="card-inner-frame">
@@ -359,11 +323,15 @@
             </div>
         </div>
 
+        <!-- Scroll Assistance Guidance Callout -->
         <div class="scroll-hint" id="scrollIndicator">
             Scroll Down to Open
         </div>
     </div>
 
+    <!-- ----------------------------------------------------
+         THE PARALLAX MECHANICAL VELOCITY LOGIC DRIVER ENGINE
+         ---------------------------------------------------- -->
     <script>
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
@@ -376,22 +344,8 @@
             const card = document.getElementById('inviteCard');
             const envelope = document.getElementById('envelopeContainer');
             const hint = document.getElementById('scrollIndicator');
-            const seal = document.getElementById('waxSeal');
 
-            // 1. Smoothly fade and pop the wax seal open during the first 12% of scroll progress
-            if (percent > 0) {
-                let sealFade = Math.max(0, 1 - (percent / 0.12));
-                seal.style.opacity = sealFade;
-                // Gently expands as if releasing physical pressure tension
-                seal.style.transform = `translate(-50%, -50%) scale(${1 + (percent * 0.3)})`;
-                seal.style.display = sealFade === 0 ? 'none' : 'flex';
-            } else {
-                seal.style.opacity = 1;
-                seal.style.transform = `translate(-50%, -50%) scale(1)`;
-                seal.style.display = 'flex';
-            }
-
-            // 2. First 35% of scroll phase lifts the 3D top flap lid open
+            // 1. First 35% of scroll phase lifts the 3D top flap lid open
             if (percent <= 0.35) {
                 let lidPercent = percent / 0.35; 
                 let degrees = lidPercent * 180; 
@@ -399,7 +353,7 @@
                 lid.style.zIndex = '4'; // Remains stacked forward above the card
                 card.style.transform = `translateY(0px)`;
             } 
-            // 3. Remaining 65% scroll sequence smoothly slides the card vertically UP out of the envelope
+            // 2. Remaining 65% scroll sequence smoothly slides the card vertically UP out of the envelope
             else {
                 lid.style.transform = `rotateX(180deg)`;
                 lid.style.zIndex = '1'; // Drops behind the base frame pockets
@@ -413,14 +367,14 @@
                 card.style.transform = `translateY(${currentSlide}px)`;
             }
 
-            // 4. Fade out the scrolling guide hint
+            // 3. Fade out the scrolling guide hint
             if (percent > 0.08) {
                 hint.style.opacity = '0';
             } else {
                 hint.style.opacity = '1';
             }
 
-            // 5. Subtle macro adjustment shifting the whole envelope down slightly once fully deployed to center everything
+            // 4. Subtle macro adjustment shifting the whole envelope down slightly once fully deployed to center everything
             if (percent > 0.75) {
                 let envelopePullPercent = (percent - 0.75) / 0.25;
                 let envelopeShift = envelopePullPercent * 50;
