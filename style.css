@@ -92,7 +92,7 @@ body {
 }
 
 .logo-image {
-    max-height: 70px; /* Perfectly scales image to look beautiful inside the 90px bar frame */
+    max-height: 70px; /* Perfectly scales image inside the frame */
     width: auto;      /* Prevents image distortion */
     display: block;
     object-fit: contain;
@@ -154,16 +154,6 @@ body {
     animation: imageScale 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Keeps the background behind the main page content as you scroll */
-.content-container {
-    position: relative;
-    z-index: 10; /* Raises the rest of your website above the fixed background image */
-    background-color: #faf9f6; /* Blocks out the fixed image so it disappears as you scroll down */
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 120px 20px;
-}
-
 /* Fallback for touch devices to prevent jumpy scrolling */
 @media (pointer: coarse) {
     .parallax-bg {
@@ -209,6 +199,9 @@ body {
    4. INTERACTIVE HOVER CARDS & GENERAL LAYOUT
    ========================================== */
 .content-container {
+    position: relative;
+    z-index: 10; /* Raises the rest of your website above the fixed background image */
+    background-color: #faf9f6; /* Blocks out the fixed image so it disappears as you scroll down */
     max-width: 1000px;
     margin: 0 auto;
     padding: 120px 20px;
@@ -383,7 +376,7 @@ h2 {
 }
 
 /* ==========================================
-   6. RESPONSIVE MOBILE SCALING
+   6. RESPONSIVE GLOBAL MOBILE SCALING
    ========================================== */
 @media (max-width: 768px) {
     .navbar {
