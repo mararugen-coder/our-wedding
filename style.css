@@ -1,4 +1,6 @@
-/* Color Palette & Base Resets */
+/* ==========================================
+   1. COLOR PALETTE, FONTS & BASE RESETS
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -7,66 +9,101 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
     color: #2b2b2b;
     line-height: 1.6;
-    background-color: #faf9f6;
+    background-color: #faf9f6; /* Warm off-white */
 }
 
-/* 1. Interactive & Sticky Sticky Navigation Bar */
+/* ==========================================
+   2. STICKY NAVIGATION BAR (FIXED LOGO)
+   ========================================== */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 90px;
-    background-color: #34495e; /* Elegant deep blue-grey matching the image */
+    background-color: #34495e; /* Premium deep blue-grey */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
     z-index: 1000;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Very subtle gold separator boundary */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Subtle gold boundary border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a {
-    color: #dfb76c; /* Elegant muted gold font */
+    color: #dfb76c; /* Elegant muted gold */
     text-decoration: none;
     font-size: 0.85rem;
     letter-spacing: 1.5px;
     margin-right: 25px;
     text-transform: uppercase;
     font-weight: 400;
+    position: relative;
+    padding-bottom: 6px;
     transition: color 0.3s ease;
 }
 
-.nav-links a:hover, .nav-links a.active {
-    color: #ffffff; /* Turns clean white on hover */
-    border-bottom: 1px solid #ffffff;
-    padding-bottom: 4px;
+/* Premium Slider Hover Underline Effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 50%;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
-/* Centered Monogram / Logo text styling */
+.nav-links a:hover::after, 
+.nav-links a.active::after {
+    width: 80%;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: #ffffff;
+}
+
+/* Centered Monogram Image Wrapper (Fixed Sizing Constraint) */
 .nav-logo {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
-.logo-main {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: #dfb76c;
-    letter-spacing: 4px;
+.logo-image {
+    max-height: 70px; /* Perfectly scales image to look beautiful inside the 90px bar frame */
+    width: auto;      /* Prevents image distortion */
+    display: block;
+    object-fit: contain;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Custom Gold Accent Button */
+.logo-image:hover {
+    transform: scale(1.05);
+}
+
+/* Premium Gold RSVP Button */
 .rsvp-top-button {
     display: inline-block;
     padding: 10px 28px;
@@ -77,25 +114,43 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 500;
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(223, 183, 108, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .rsvp-top-button:hover {
     background-color: #c9a054;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(223, 183, 108, 0.4);
 }
 
-/* 2. Hero Background Layout */
+/* ==========================================
+   3. HERO BACKGROUND LAYOUT & IMAGE ANIMATION
+   ========================================== */
 .hero {
     position: relative;
     height: 100vh;
     width: 100%;
-    background: url('hero-bg.jpg') no-repeat center center/cover;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 90px; /* Accounts for navbar height offset */
+    padding-top: 90px;
+    background-color: #2c3e50;
+}
+
+/* Smooth initial Ken Burns scale animation for the backdrop photo */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    animation: imageScale 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 0;
 }
 
 .hero-overlay {
@@ -104,7 +159,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(44, 62, 80, 0.35); /* Cool deep tint overlay to tie it to the navbar */
+    background: rgba(44, 62, 80, 0.4); /* Dark deep blue mask tint */
     z-index: 1;
 }
 
@@ -117,90 +172,133 @@ body {
 
 .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 5rem;
+    font-size: 5.5rem;
     font-weight: 300;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 15px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 3px 15px rgba(0,0,0,0.3);
 }
 
 .hero-date {
     font-family: 'Cormorant Garamond', serif;
     font-size: 4rem;
     font-weight: 400;
-    letter-spacing: 6px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    letter-spacing: 8px;
+    text-shadow: 0 3px 15px rgba(0,0,0,0.3);
 }
 
-/* 3. Smooth Visual Fade-In Keyframe Animations */
-.animate-fade-up {
-    animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    opacity: 0;
-}
-
-.animate-fade-up-delay {
-    animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 0.4s;
-    opacity: 0;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Content & Block Styles */
+/* ==========================================
+   4. INTERACTIVE HOVER CARDS & GENERAL LAYOUT
+   ========================================== */
 .content-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 100px 20px;
+    padding: 120px 20px;
 }
 
 .info-section {
     text-align: center;
-    margin-bottom: 120px;
+    margin-bottom: 140px;
 }
 
 h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    color: #34495e;
 }
 
 .subtitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-style: italic;
     font-family: 'Cormorant Garamond', serif;
     color: #7f8c8d;
-    margin-top: 5px;
+    margin-top: 6px;
+    letter-spacing: 1px;
 }
 
+/* Animated Micro Divider */
 .divider {
-    width: 50px;
+    width: 60px;
     height: 1px;
     background-color: #dfb76c;
     border: none;
-    margin: 25px auto;
+    margin: 30px auto;
+    position: relative;
+    transition: width 0.4s ease;
+}
+
+.info-section:hover .divider {
+    width: 100px;
 }
 
 .section-text {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 300;
-    color: #555;
+    color: #555555;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* Grid Layout for Cards */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+/* High-End Card Motion Triggers */
+.event-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle gold accent border reveal on card hover */
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #dfb76c;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+}
+
+.event-card:hover::before {
+    transform: scaleX(1);
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(52, 73, 94, 0.08);
+    border-color: rgba(212, 175, 55, 0.15);
 }
 
 .event-card h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 400;
-    margin-bottom: 10px;
+    color: #34495e;
+    margin-bottom: 12px;
+}
+
+.event-card .time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: #dfb76c;
+    margin: 12px 0;
+    font-weight: 400;
 }
 
 .event-card .venue {
@@ -209,9 +307,10 @@ h2 {
     font-weight: 300;
 }
 
+/* Hollow Secondary Styled CTA Buttons */
 .cta-button {
     display: inline-block;
-    padding: 12px 35px;
+    padding: 14px 40px;
     background-color: transparent;
     color: #34495e;
     border: 1px solid #34495e;
@@ -219,32 +318,95 @@ h2 {
     letter-spacing: 2px;
     font-size: 0.85rem;
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-top: 20px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cta-button:hover {
     background-color: #34495e;
     color: #ffffff;
+    box-shadow: 0 8px 20px rgba(52, 73, 94, 0.15);
+    transform: translateY(-1px);
 }
 
-/* Responsive Mobile Layout Adjustments */
+/* ==========================================
+   5. KEYFRAME VELOCITY TRANSITIONS
+   ========================================== */
+.animate-fade-up {
+    animation: fadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+.animate-fade-up-delay {
+    animation: fadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes imageScale {
+    from {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* ==========================================
+   6. RESPONSIVE MOBILE SCALING
+   ========================================== */
 @media (max-width: 768px) {
-    .navbar { padding: 0 20px; }
-    .nav-links a { margin-right: 12px; font-size: 0.75rem; }
-    .logo-main { font-size: 1.8rem; }
-    .hero-title { font-size: 3rem; }
-    .hero-date { font-size: 2.2rem; }
-}
-
-/* Custom Logo Sizing Adjustments */
-.logo-image {
-    max-height: 60px; /* Limits the logo height so it doesn't distort the navbar */
-    width: auto;      /* Keeps your logo proportions perfectly proportional */
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-image:hover {
-    transform: scale(1.03); /* Adds a subtle, elegant zoom effect when hovered */
+    .navbar {
+        padding: 0 20px;
+        height: 80px;
+    }
+    
+    .nav-links a {
+        margin-right: 12px;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+    
+    .logo-image {
+        max-height: 55px;
+    }
+    
+    .rsvp-top-button {
+        padding: 8px 18px;
+        font-size: 0.75rem;
+    }
+    
+    .hero-title {
+        font-size: 3.2rem;
+    }
+    
+    .hero-date {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+    
+    .schedule-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .content-container {
+        padding: 60px 20px;
+    }
+    
+    .info-section {
+        margin-bottom: 80px;
+    }
 }
