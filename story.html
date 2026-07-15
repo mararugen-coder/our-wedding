@@ -91,13 +91,13 @@
             padding-left: 5px;
         }
 
-        /* 3. Multi-Column Detailed Story Grid */
+        /* 3. Re-balanced Asymmetric Detailed Story Grid */
         .details-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 0.8fr 1.2fr; /* Widens the text block and scales down the square photo aspect */
             gap: 60px;
-            align-items: center;
-            max-width: 1000px;
+            align-items: start; /* Aligns items to the top instead of centering, matching standard editorial layouts */
+            max-width: 1100px; /* Expanded maximum page width boundary */
             margin: 120px auto;
             padding: 0 40px;
         }
@@ -106,6 +106,7 @@
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             overflow: hidden;
+            width: 100%;
         }
         
         /* Ring Photo Container */
@@ -140,20 +141,20 @@
         
         /* Story Text Column */
         .details-right {
-            padding-right: 20px;
+            padding-left: 10px;
         }
         
         .story-paragraph {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.95rem;
-            line-height: 1.8;
+            line-height: 1.9; /* Enhanced baseline typography spacing */
             font-weight: 300;
             color: #555555;
             margin-bottom: 25px;
             text-align: left;
         }
 
-        /* 4. Infinite Horizontal Scrolling Gallery (Aspect-Ratio Preserved) */
+        /* 4. Infinite Horizontal Scrolling Gallery */
         .gallery-section-title {
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
@@ -187,17 +188,17 @@
         
         .gallery-item {
             width: auto;
-            height: 300px;           /* Sets a uniform horizontal boundary track line */
+            height: 300px;           
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            flex-shrink: 0;          /* Prevents photos from compressing narrow horizontally */
+            flex-shrink: 0;          
         }
         
         .gallery-item img {
             width: auto;
-            height: 100%;            /* Fills vertical line perfectly */
-            object-fit: contain;     /* Keeps full photo framing visible without clipping faces */
+            height: 100%;            
+            object-fit: contain;     
             display: block;
             transition: transform 0.5s ease;
         }
@@ -286,11 +287,12 @@
             </div>
         </section>
 
-        <!-- Detailed Grid Section -->
+        <!-- Re-balanced Structural Editorial Grid Section -->
         <section class="details-grid">
             <div class="details-left">
                 <div class="ring-photo-wrapper">
                     <img src="story-ring.jpg" alt="Mara's Engagement Ring" class="ring-photo">
+                    <div class="photo-overlay-text">daryl & mara</div>
                 </div>
             </div>
             
@@ -314,7 +316,6 @@
         <section style="margin-top: 100px;">
             <h2 class="gallery-section-title">Our Adventures</h2>
             <div class="scroll-gallery-viewport">
-                <!-- Double the images in the track (7 original + 7 duplicate) to keep the infinite animation seamless -->
                 <div class="scroll-gallery-track">
                     <div class="gallery-item"><img src="gallery1.jpg" alt="Adventure 1"></div>
                     <div class="gallery-item"><img src="gallery2.jpg" alt="Adventure 2"></div>
