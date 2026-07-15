@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You are Invited — Celebrating the Giglios</title>
-    <!-- Fonts matching the rest of your beautiful premium site layout -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -15,13 +14,63 @@
         }
 
         body {
-            background-color: #faf9f6; /* Matching your signature warm off-white */
+            background-color: #faf9f6; /* Signature warm off-white */
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            height: 200vh; /* Extra scroll runway room to fuel the mechanical scroll animation smoothly */
+            height: 220vh; /* Smooth scrolling runway to trigger the card opening */
+            position: relative;
         }
 
-        /* Fixed frame context hosting the visual simulation container scene */
+        /* ----------------------------------------------------
+           BOTANICAL BACKGROUND ELEMENTS (SAGE, RUST & GOLD)
+           ---------------------------------------------------- */
+        /* Soft watercolor botanical shapes in the background corners */
+        .bg-floral {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+            transition: transform 0.5s ease-out;
+        }
+
+        .bg-floral-top-left {
+            top: -50px;
+            left: -50px;
+            transform: rotate(-15deg);
+        }
+
+        .bg-floral-bottom-right {
+            bottom: -50px;
+            right: -50px;
+            transform: rotate(165deg);
+        }
+
+        /* Floating background organic color spots (Sage, Rust, Gold) */
+        .organic-blob-sage {
+            position: fixed;
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(163, 177, 155, 0.15) 0%, rgba(250, 249, 246, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .organic-blob-rust {
+            position: fixed;
+            bottom: 15%;
+            right: 15%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(217, 125, 86, 0.12) 0%, rgba(250, 249, 246, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Fixed viewport scene containing the envelope */
         .invite-viewport-scene {
             position: fixed;
             top: 0;
@@ -31,11 +80,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1200px; /* Essential 3D depth context for the realistic folding flap */
+            perspective: 1200px;
             z-index: 10;
         }
 
-        /* Scroll Progress Hint Tracker Callout Indicator */
+        /* Scroll Progress Hint Tracker */
         .scroll-hint {
             position: absolute;
             bottom: 40px;
@@ -43,27 +92,28 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #7f8c8d;
+            color: #7d8c77; /* Sage accent */
             animation: bounceIndicator 2s infinite;
             text-align: center;
             pointer-events: none;
             transition: opacity 0.4s ease;
+            font-weight: 400;
         }
 
         /* ----------------------------------------------------
-           THE INTERACTIVE ENVELOPE MACHINE LAYERS
+           THE ENVELOPE (MATTE SAGE & SHIMMER GOLD)
            ---------------------------------------------------- */
         .envelope-wrapper {
             position: relative;
-            width: 450px;
-            height: 320px;
-            background-color: #2c3e50; /* Elegant slate blue base matching your aesthetic theme palette */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-            margin-top: 50px;
+            width: 460px;
+            height: 360px; /* Taller envelope to completely hold the card */
+            background-color: #7d8c77; /* Soft Premium Sage Green Base */
+            box-shadow: 0 30px 60px rgba(44, 62, 80, 0.15);
+            margin-top: 60px;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* The Left, Right, and Bottom Flaps built using seamless overlay dimensions */
+        /* The Left, Right, and Bottom overlapping fold flap pockets */
         .envelope-wrapper::before {
             content: '';
             position: absolute;
@@ -71,120 +121,169 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(315deg, #34495e 50%, transparent 50%),
-                        linear-gradient(45deg, #34495e 50%, transparent 50%),
-                        linear-gradient(to top, #2c3e50 40%, #34495e 100%);
-            z-index: 3; /* Keeps the pocket side edges sitting over the card insert */
+            /* Sophisticated multi-angle pocket shadows */
+            background: linear-gradient(315deg, #6e7d69 50%, transparent 50%),
+                        linear-gradient(45deg, #6e7d69 50%, transparent 50%),
+                        linear-gradient(to top, #7d8c77 30%, #879781 100%);
+            z-index: 3; /* Keeps envelope front pockets stacked completely over the card insert */
+            border-bottom: 2px solid rgba(219, 183, 108, 0.3); /* Subtle gold foil baseline trim */
         }
 
-        /* The Top Triangular Unfolding Lid Flap */
+        /* The Top Open Flap (Sage interior, Gold foil outer peak trim) */
         .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 0;
-            border-left: 225px solid transparent;
-            border-right: 225px solid transparent;
-            border-top: 160px solid #2c3e50; /* Rich solid peak point */
+            border-left: 230px solid transparent;
+            border-right: 230px solid transparent;
+            border-top: 180px solid #7d8c77; /* Matches base Sage */
             transform-origin: top center;
-            z-index: 4; /* Sits completely on top to hide card until pulled open */
+            z-index: 4; /* Keeps flap stacked above card until flipped open */
             transform: rotateX(0deg);
             will-change: transform;
-            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+        }
+
+        /* Beautiful gold foil edge line on the inner lip of the opening flap */
+        .envelope-flap::after {
+            content: '';
+            position: absolute;
+            top: -182px;
+            left: -230px;
+            width: 0;
+            height: 0;
+            border-left: 230px solid transparent;
+            border-right: 230px solid transparent;
+            border-top: 180px solid rgba(219, 183, 108, 0.5);
+            z-index: -1;
+            transform: scale(0.98) translateY(-2px);
         }
 
         /* ----------------------------------------------------
-           THE WEDDING INVITATION CARD INSERT LAYER
+           THE WEDDING INVITATION CARD (GOLD FOIL + FLORAL INNER)
            ---------------------------------------------------- */
         .invitation-card {
             position: absolute;
-            top: 10px;
+            top: 25px; /* Safely tucked away inside envelope height */
             left: 20px;
-            width: 410px;
-            height: 560px; /* Taller card profile sliding upward vertically */
+            width: 420px;
+            height: 310px; /* Kept strictly under 360px so it is invisible from bottom */
             background-color: #ffffff;
-            border: 1px solid rgba(212, 175, 55, 0.25); /* Fine subtle gold border detail boundary edge */
-            padding: 50px 30px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            z-index: 2; /* Sandwiched behind the side envelope pocket but above the back background panel */
+            z-index: 2; /* Sandwiched behind front pockets, in front of back panel */
             transform: translateY(0);
             will-change: transform;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.5s ease;
         }
 
-        /* Custom Inner Decorative Border Rim Frame Outline Line Box styling */
+        /* Realistic Multi-Tone Gold Foil Outer Border Trim */
+        .gold-foil-border {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            pointer-events: none;
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%) 1;
+        }
+
+        /* Inner Content Frame Container */
         .card-inner-frame {
-            border: 1px solid #dfb76c;
             width: 100%;
             height: 100%;
-            padding: 40px 20px;
+            padding: 40px 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
-        /* Typography Styling details mirroring your clean elegant layout look */
+        /* Corner Floral sprigs nested inside the gold foil borders */
+        .card-corner-floral {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            pointer-events: none;
+        }
+
+        .card-floral-top-left {
+            top: 15px;
+            left: 15px;
+        }
+
+        .card-floral-bottom-right {
+            bottom: 15px;
+            right: 15px;
+            transform: rotate(180deg);
+        }
+
+        /* Inner Card Typography */
         .card-caption {
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #7f8c8d;
+            color: #7d8c77; /* Sage */
+            font-weight: 500;
         }
 
         .card-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.3rem;
+            font-size: 2.1rem;
             font-weight: 300;
             color: #34495e;
-            line-height: 1.2;
-            margin: 15px 0;
+            line-height: 1.25;
+            margin: 10px 0;
         }
 
         .card-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-style: italic;
-            color: #dfb76c;
+            color: #d97d56; /* Rust Orange Accent */
             letter-spacing: 1px;
+            font-weight: 400;
         }
 
         .card-location {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 1.5px;
             color: #555555;
             text-transform: uppercase;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-weight: 300;
         }
 
-        /* The Premium Navigation Link Gateway Action Trigger Block */
+        /* Gold Foil Button link to Homepage */
         .card-cta-link {
             display: inline-block;
-            padding: 12px 35px;
-            background-color: #dfb76c;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #aa771c 100%);
             color: #ffffff;
             text-decoration: none;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 500;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(223, 183, 108, 0.2);
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(170, 119, 28, 0.25);
             transition: all 0.3s ease;
+            border: none;
         }
 
         .card-cta-link:hover {
-            background-color: #c9a054;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(223, 183, 108, 0.35);
+            box-shadow: 0 6px 20px rgba(170, 119, 28, 0.45);
         }
 
-        /* Animation Keyframe definitions */
+        /* Animation Helpers */
         @keyframes bounceIndicator {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-8px); }
@@ -192,75 +291,131 @@
         }
 
         /* ----------------------------------------------------
-           RESPONSIVE MOBILE GRAPHIC CONTAINER FRAME SCALING
+           RESPONSIVE MOBILE GRAPHIC CONTAINER SCALING
            ---------------------------------------------------- */
         @media (max-width: 500px) {
             .envelope-wrapper {
                 width: 320px;
-                height: 240px;
+                height: 250px;
+                margin-top: 30px;
             }
             .envelope-flap {
                 border-left-width: 160px;
                 border-right-width: 160px;
-                border-top-width: 120px;
+                border-top-width: 125px;
+            }
+            .envelope-flap::after {
+                border-left-width: 160px;
+                border-right-width: 160px;
+                border-top-width: 125px;
+                top: -127px;
+                left: -160px;
             }
             .invitation-card {
                 width: 290px;
-                height: 440px;
+                height: 215px;
                 left: 15px;
-                top: 10px;
-                padding: 30px 15px;
+                top: 20px;
             }
-            .card-inner-frame { padding: 25px 10px; }
-            .card-title { font-size: 1.7rem; }
-            .card-date { font-size: 1.3rem; }
-            .card-location { font-size: 0.7rem; }
+            .card-inner-frame { padding: 20px 15px; }
+            .card-title { font-size: 1.5rem; }
+            .card-date { font-size: 1.15rem; }
+            .card-location { font-size: 0.65rem; }
+            .card-cta-link { padding: 8px 20px; font-size: 0.7rem; }
+            .bg-floral { width: 220px; height: 220px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Scroll Context Scene Viewport Anchor Framework Box -->
+    <div class="organic-blob-sage"></div>
+    <div class="organic-blob-rust"></div>
+
+    <svg class="bg-floral bg-floral-top-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10,10 Q35,40 50,80" stroke="#7d8c77" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M22,25 Q12,12 8,22 Q15,30 22,25" fill="#a3b19b" opacity="0.85"/>
+        <path d="M33,39 Q18,32 18,42 Q25,48 33,39" fill="#a3b19b" opacity="0.85"/>
+        <path d="M42,54 Q30,51 32,61 Q40,62 42,54" fill="#a3b19b" opacity="0.85"/>
+        <path d="M10,10 Q50,20 80,40" stroke="#dfb76c" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="50" cy="18" r="3" fill="#dfb76c"/>
+        <circle cx="68" cy="27" r="2.5" fill="#dfb76c"/>
+        <circle cx="80" cy="40" r="2" fill="#dfb76c"/>
+        <path d="M10,10 Q20,60 40,90" stroke="#d97d56" stroke-width="1.2" stroke-dasharray="2 2"/>
+        <path d="M17,45 C10,48 10,58 17,55 C22,50 20,42 17,45 Z" fill="#d97d56" opacity="0.9"/>
+        <path d="M29,68 C22,72 24,82 29,78 C33,73 32,65 29,68 Z" fill="#d97d56" opacity="0.9"/>
+    </svg>
+
+    <svg class="bg-floral bg-floral-bottom-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10,10 Q35,40 50,80" stroke="#7d8c77" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M22,25 Q12,12 8,22 Q15,30 22,25" fill="#a3b19b" opacity="0.85"/>
+        <path d="M33,39 Q18,32 18,42 Q25,48 33,39" fill="#a3b19b" opacity="0.85"/>
+        <path d="M42,54 Q30,51 32,61 Q40,62 42,54" fill="#a3b19b" opacity="0.85"/>
+        <path d="M10,10 Q50,20 80,40" stroke="#dfb76c" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="50" cy="18" r="3" fill="#dfb76c"/>
+        <circle cx="68" cy="27" r="2.5" fill="#dfb76c"/>
+        <circle cx="80" cy="40" r="2" fill="#dfb76c"/>
+        <path d="M10,10 Q20,60 40,90" stroke="#d97d56" stroke-width="1.2" stroke-dasharray="2 2"/>
+        <path d="M17,45 C10,48 10,58 17,55 C22,50 20,42 17,45 Z" fill="#d97d56" opacity="0.9"/>
+        <path d="M29,68 C22,72 24,82 29,78 C33,73 32,65 29,68 Z" fill="#d97d56" opacity="0.9"/>
+    </svg>
+
+
     <div class="invite-viewport-scene">
         
-        <!-- The Envelope Container Box -->
         <div class="envelope-wrapper" id="envelopeContainer">
-            <!-- The Top Lid Flap -->
             <div class="envelope-flap" id="envelopeLid"></div>
             
-            <!-- Inside Invitation Insert Card Panel -->
             <div class="invitation-card" id="inviteCard">
+                <div class="gold-foil-border"></div>
+
                 <div class="card-inner-frame">
+                    <svg class="card-corner-floral card-floral-top-left" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5,5 Q15,20 25,35" stroke="#7d8c77" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M11,13 Q4,4 2,9 Q6,14 11,13" fill="#a3b19b"/>
+                        <path d="M17,21 Q10,15 9,20 Q13,25 17,21" fill="#a3b19b"/>
+                        <circle cx="25" cy="10" r="2" fill="#dfb76c"/>
+                        <path d="M5,5 Q20,10 35,15" stroke="#dfb76c" stroke-width="0.8"/>
+                        <circle cx="35" cy="15" r="1.5" fill="#dfb76c"/>
+                        <path d="M8,22 C4,24 5,30 8,28 C11,26 10,21 8,22 Z" fill="#d97d56"/>
+                    </svg>
+
+                    <svg class="card-corner-floral card-floral-bottom-right" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5,5 Q15,20 25,35" stroke="#7d8c77" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M11,13 Q4,4 2,9 Q6,14 11,13" fill="#a3b19b"/>
+                        <path d="M17,21 Q10,15 9,20 Q13,25 17,21" fill="#a3b19b"/>
+                        <circle cx="25" cy="10" r="2" fill="#dfb76c"/>
+                        <path d="M5,5 Q20,10 35,15" stroke="#dfb76c" stroke-width="0.8"/>
+                        <circle cx="35" cy="15" r="1.5" fill="#dfb76c"/>
+                        <path d="M8,22 C4,24 5,30 8,28 C11,26 10,21 8,22 Z" fill="#d97d56"/>
+                    </svg>
+
                     <span class="card-caption">The Wedding Invitation</span>
+                    
                     <div>
                         <h1 class="card-title">Celebrating<br>the Giglios</h1>
                         <p class="card-date">07 . 24 . 27</p>
                     </div>
+                    
                     <p class="card-location">
-                        Flagstaff, Arizona<br>
-                        <!-- Rest of the locations details can sit nicely here -->
+                        Flagstaff, Arizona
                     </p>
-                    <!-- Link straight back into the fully responsive standard homepage framework index file link -->
+                    
                     <a href="index.html" class="card-cta-link">Enter Website</a>
                 </div>
             </div>
         </div>
 
-        <!-- Sticky Floating Scroll Assist Prompt -->
         <div class="scroll-hint" id="scrollIndicator">
             Scroll Down to Open
         </div>
     </div>
 
-    <!-- ----------------------------------------------------
-         THE PARALLAX MECHANICAL VELOCITY LOGIC DRIVER ENGINE
-         ---------------------------------------------------- -->
     <script>
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const maxScroll = window.innerHeight; // Animation spans the length of one complete viewport transition scroll height
             
-            // Calculate a unified decimal progression percentage value tracking indicator boundary path marker
+            // Calculate progress percentage
             let percent = Math.min(scrollTop / maxScroll, 1);
 
             const lid = document.getElementById('envelopeLid');
@@ -268,39 +423,39 @@
             const envelope = document.getElementById('envelopeContainer');
             const hint = document.getElementById('scrollIndicator');
 
-            // 1. First 40% of scroll phase dictates the mechanical 3D lifting extension track execution of the flap lid lid cover
-            if (percent <= 0.4) {
-                let lidPercent = percent / 0.4; // Local normalized reference scale 
-                let degrees = lidPercent * 180; // Pivots standard horizontal degree alignment framework
+            // 1. First 35% of scroll phase lifts the 3D top flap lid open
+            if (percent <= 0.35) {
+                let lidPercent = percent / 0.35; 
+                let degrees = lidPercent * 180; 
                 lid.style.transform = `rotateX(${degrees}deg)`;
-                lid.style.zIndex = '4'; // Remains stacked forward above the card boundary line
+                lid.style.zIndex = '4'; // Remains stacked forward above the card
                 card.style.transform = `translateY(0px)`;
             } 
-            // 2. Remaining 60% scroll sequence initiates the vertical rising slide execution track of the card frame assembly context
+            // 2. Remaining 65% scroll sequence smoothly slides the card vertically UP out of the envelope
             else {
                 lid.style.transform = `rotateX(180deg)`;
-                lid.style.zIndex = '1'; // Drops behind the base frame so it looks like it came out of the inside deep pocket cavity context
+                lid.style.zIndex = '1'; // Drops behind the base frame pockets
 
-                let cardPercent = (percent - 0.4) / 0.6;
+                let cardPercent = (percent - 0.35) / 0.65;
                 
-                // Adjusts distance the card climbs out based on mobile vs desktop dimension proportions
-                let slideDistance = window.innerWidth <= 500 ? -240 : -340;
+                // Adapts sliding distance based on mobile vs desktop size constraints
+                let slideDistance = window.innerWidth <= 500 ? -205 : -305;
                 let currentSlide = cardPercent * slideDistance;
                 
                 card.style.transform = `translateY(${currentSlide}px)`;
             }
 
-            // 3. Gracefully ease out the scrolling baseline guidance indicator opacity once active track manipulation tracking initiates
-            if (percent > 0.1) {
+            // 3. Fade out the scrolling guide hint
+            if (percent > 0.08) {
                 hint.style.opacity = '0';
             } else {
                 hint.style.opacity = '1';
             }
 
-            // 4. Subtle macro adjustment shifting the whole framework down slightly once fully deployed to frame card perfectly center
-            if (percent > 0.8) {
-                let envelopePullPercent = (percent - 0.8) / 0.2;
-                let envelopeShift = envelopePullPercent * 60;
+            // 4. Subtle macro adjustment shifting the whole envelope down slightly once fully deployed to center everything
+            if (percent > 0.75) {
+                let envelopePullPercent = (percent - 0.75) / 0.25;
+                let envelopeShift = envelopePullPercent * 50;
                 envelope.style.transform = `translateY(${envelopeShift}px)`;
             } else {
                 envelope.style.transform = `translateY(0px)`;
