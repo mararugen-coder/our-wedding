@@ -38,6 +38,28 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Hide hamburger controls by default on Desktop */
+.menu-checkbox {
+    display: none;
+}
+
+.hamburger-btn {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    z-index: 1100;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: #dfb76c; /* Elegant muted gold */
+    transition: all 0.3s ease-in-out;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -140,14 +162,14 @@ body {
     background-color: #2c3e50;
 }
 
-/* The True Parallax Engine (Cleaned & Hard-Coded) */
+/* The True Parallax Engine */
 .parallax-bg {
-    position: fixed; /* Forces the photo to stay glued to the viewport background */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('hero-bg.jpg') no-repeat center center;
+    background: url('hero-bg.jpg') no-repeat center center; /* Standard centering for desktops */
     background-size: cover;
     z-index: 0;
     will-change: transform;
@@ -200,8 +222,8 @@ body {
    ========================================== */
 .content-container {
     position: relative;
-    z-index: 10; /* Raises the rest of your website above the fixed background image */
-    background-color: #faf9f6; /* Blocks out the fixed image so it disappears as you scroll down */
+    z-index: 10;
+    background-color: #faf9f6;
     max-width: 1000px;
     margin: 0 auto;
     padding: 120px 20px;
@@ -272,7 +294,6 @@ h2 {
     overflow: hidden;
 }
 
-/* Subtle gold accent border reveal on card hover */
 .event-card::before {
     content: '';
     position: absolute;
@@ -379,26 +400,90 @@ h2 {
    6. RESPONSIVE GLOBAL MOBILE SCALING
    ========================================== */
 @media (max-width: 768px) {
+    /* Navbar Structural Override for Mobile */
     .navbar {
-        padding: 0 20px;
-        height: 80px;
+        padding: 0 24px;
+        height: 90px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
-    .nav-links a {
-        margin-right: 12px;
-        font-size: 0.75rem;
-        letter-spacing: 1px;
+    /* Make Hamburger Button Visible */
+    .hamburger-btn {
+        display: flex;
+        order: 1; /* Forces to Far Left */
+    }
+
+    /* Keep Logo Perfectly Centered */
+    .nav-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        order: 2;
     }
     
     .logo-image {
         max-height: 55px;
+    }
+
+    /* RSVP Button Layout Control */
+    .nav-rsvp {
+        order: 3; /* Forces to Far Right */
+        display: flex;
+        align-items: center;
     }
     
     .rsvp-top-button {
         padding: 8px 18px;
         font-size: 0.75rem;
     }
-    
+
+    /* Transform Navigation Links into a Slide-Out Drawer */
+    .nav-links {
+        position: fixed;
+        top: 90px; /* Sits flush under the header */
+        left: -100%; /* Hidden off-screen to the left by default */
+        width: 280px;
+        height: calc(100vh - 90px);
+        background-color: #34495e;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 30px;
+        gap: 25px;
+        transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.15);
+        border-right: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .nav-links a {
+        margin-right: 0;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        width: 100%;
+        display: block;
+    }
+
+    /* Slide the Menu in when the hidden checkbox is Checked */
+    .menu-checkbox:checked ~ .nav-links {
+        left: 0;
+    }
+
+    /* Animate Hamburger icon lines into an "X" when open */
+    .menu-checkbox:checked ~ .hamburger-btn .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-checkbox:checked ~ .hamburger-btn .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-checkbox:checked ~ .hamburger-btn .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Global Page Mobile Adjustments */
     .hero-title {
         font-size: 3.2rem;
     }
@@ -421,8 +506,11 @@ h2 {
         margin-bottom: 80px;
     }
 
-    /* Mobile Only Background Focus Adjustment to center on Daryl */
+    /* Mobile Only Background Focus Adjustment:
+       Aligning at 25% horizontally pulls the right side of the photo (where Daryl is) 
+       into the active viewport area, preventing cropping!
+    */
     .parallax-bg {
-        background-position: 50% center !important;
+        background-position: 25% center !important;
     }
 }
