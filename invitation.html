@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You are Invited — Celebrating the Giglios</title>
+    <!-- Premium Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     
+    <link rel="icon" href="favicon-black.png" type="image/png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="favicon-white.png" type="image/png" media="(prefers-color-scheme: dark)">
+
     <style>
         * {
             margin: 0;
@@ -22,55 +26,78 @@
         }
 
         /* ----------------------------------------------------
-           BOTANICAL BACKGROUND ELEMENTS (SAGE, RUST & GOLD)
+           ORGANIC WATERCOLOR FLORALS & BACKGROUND WASHES
            ---------------------------------------------------- */
-        /* Soft watercolor botanical shapes in the background corners */
-        .bg-floral {
+        /* Soft watercolor washes in the background corners */
+        .watercolor-wash-sage {
             position: fixed;
-            width: 350px;
-            height: 350px;
+            top: -5%;
+            left: -5%;
+            width: 45%;
+            height: 45vh;
+            background: radial-gradient(circle, rgba(163, 177, 155, 0.25) 0%, rgba(250, 249, 246, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(15px);
+        }
+
+        .watercolor-wash-rust {
+            position: fixed;
+            bottom: -5%;
+            right: -5%;
+            width: 50%;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(217, 125, 86, 0.2) 0%, rgba(250, 249, 246, 0) 75%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(15px);
+        }
+
+        /* Abundant Hand-drawn Florals framing the screen corners */
+        .floral-corner {
+            position: fixed;
+            width: 450px;
+            height: 450px;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.85;
-            transition: transform 0.5s ease-out;
+            opacity: 0.92;
         }
 
-        .bg-floral-top-left {
-            top: -50px;
-            left: -50px;
-            transform: rotate(-15deg);
+        .floral-top-left {
+            top: -60px;
+            left: -60px;
+            transform: rotate(-10deg);
         }
 
-        .bg-floral-bottom-right {
-            bottom: -50px;
-            right: -50px;
-            transform: rotate(165deg);
+        .floral-bottom-right {
+            bottom: -60px;
+            right: -60px;
+            transform: rotate(170deg);
         }
 
-        /* Floating background organic color spots (Sage, Rust, Gold) */
-        .organic-blob-sage {
+        /* Secondary foliage to fill the background and add depth */
+        .floral-background-accent {
             position: fixed;
-            top: 20%;
-            left: 10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(163, 177, 155, 0.15) 0%, rgba(250, 249, 246, 0) 70%);
+            width: 320px;
+            height: 320px;
             pointer-events: none;
             z-index: 0;
+            opacity: 0.6;
         }
 
-        .organic-blob-rust {
-            position: fixed;
-            bottom: 15%;
-            right: 15%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(217, 125, 86, 0.12) 0%, rgba(250, 249, 246, 0) 70%);
-            pointer-events: none;
-            z-index: 0;
+        .floral-accent-top-right {
+            top: 5%;
+            right: -40px;
+            transform: rotate(45deg);
         }
 
-        /* Fixed viewport scene containing the envelope */
+        .floral-accent-bottom-left {
+            bottom: 5%;
+            left: -40px;
+            transform: rotate(-135deg);
+        }
+
+        /* Fixed viewport scene hosting the envelope */
         .invite-viewport-scene {
             position: fixed;
             top: 0;
@@ -92,7 +119,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #7d8c77; /* Sage accent */
+            color: #d97d56; /* Rust accent */
             animation: bounceIndicator 2s infinite;
             text-align: center;
             pointer-events: none;
@@ -101,14 +128,14 @@
         }
 
         /* ----------------------------------------------------
-           THE ENVELOPE (MATTE SAGE & SHIMMER GOLD)
+           THE ENVELOPE (MATTE SLATE BLUE & SHIMMER GOLD)
            ---------------------------------------------------- */
         .envelope-wrapper {
             position: relative;
             width: 460px;
             height: 360px; /* Taller envelope to completely hold the card */
-            background-color: #7d8c77; /* Soft Premium Sage Green Base */
-            box-shadow: 0 30px 60px rgba(44, 62, 80, 0.15);
+            background-color: #34495e; /* Elegant slate blue base */
+            box-shadow: 0 30px 60px rgba(44, 62, 80, 0.2);
             margin-top: 60px;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -121,15 +148,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Sophisticated multi-angle pocket shadows */
-            background: linear-gradient(315deg, #6e7d69 50%, transparent 50%),
-                        linear-gradient(45deg, #6e7d69 50%, transparent 50%),
-                        linear-gradient(to top, #7d8c77 30%, #879781 100%);
-            z-index: 3; /* Keeps envelope front pockets stacked completely over the card insert */
-            border-bottom: 2px solid rgba(219, 183, 108, 0.3); /* Subtle gold foil baseline trim */
+            /* Multi-angle pockets with soft realistic shadows */
+            background: linear-gradient(315deg, #2c3e50 50%, transparent 50%),
+                        linear-gradient(45deg, #2c3e50 50%, transparent 50%),
+                        linear-gradient(to top, #34495e 30%, #3d566e 100%);
+            z-index: 3; /* Keeps envelope front pockets stacked completely over the card */
+            border-bottom: 2px solid rgba(219, 183, 108, 0.25); /* Subtle gold foil baseline trim */
         }
 
-        /* The Top Open Flap (Sage interior, Gold foil outer peak trim) */
+        /* The Top Open Flap (Slate Blue interior, Gold foil outer peak trim) */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -138,15 +165,15 @@
             height: 0;
             border-left: 230px solid transparent;
             border-right: 230px solid transparent;
-            border-top: 180px solid #7d8c77; /* Matches base Sage */
+            border-top: 180px solid #34495e; /* Matches base Slate Blue */
             transform-origin: top center;
             z-index: 4; /* Keeps flap stacked above card until flipped open */
             transform: rotateX(0deg);
             will-change: transform;
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
         }
 
-        /* Beautiful gold foil edge line on the inner lip of the opening flap */
+        /* Gold foil edge line on the inner lip of the opening flap */
         .envelope-flap::after {
             content: '';
             position: absolute;
@@ -156,9 +183,9 @@
             height: 0;
             border-left: 230px solid transparent;
             border-right: 230px solid transparent;
-            border-top: 180px solid rgba(219, 183, 108, 0.5);
+            border-top: 180px solid rgba(219, 183, 108, 0.4);
             z-index: -1;
-            transform: scale(0.98) translateY(-2px);
+            transform: scale(0.982) translateY(-2px);
         }
 
         /* ----------------------------------------------------
@@ -209,8 +236,8 @@
         /* Corner Floral sprigs nested inside the gold foil borders */
         .card-corner-floral {
             position: absolute;
-            width: 55px;
-            height: 55px;
+            width: 65px;
+            height: 65px;
             pointer-events: none;
         }
 
@@ -322,53 +349,96 @@
             .card-date { font-size: 1.15rem; }
             .card-location { font-size: 0.65rem; }
             .card-cta-link { padding: 8px 20px; font-size: 0.7rem; }
-            .bg-floral { width: 220px; height: 220px; }
+            .floral-corner { width: 280px; height: 280px; }
+            .floral-background-accent { width: 200px; height: 200px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="organic-blob-sage"></div>
-    <div class="organic-blob-rust"></div>
+    <!-- Soft watercolor background elements -->
+    <div class="watercolor-wash-sage"></div>
+    <div class="watercolor-wash-rust"></div>
 
-    <svg class="bg-floral bg-floral-top-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10,10 Q35,40 50,80" stroke="#7d8c77" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M22,25 Q12,12 8,22 Q15,30 22,25" fill="#a3b19b" opacity="0.85"/>
-        <path d="M33,39 Q18,32 18,42 Q25,48 33,39" fill="#a3b19b" opacity="0.85"/>
-        <path d="M42,54 Q30,51 32,61 Q40,62 42,54" fill="#a3b19b" opacity="0.85"/>
-        <path d="M10,10 Q50,20 80,40" stroke="#dfb76c" stroke-width="1" stroke-linecap="round"/>
-        <circle cx="50" cy="18" r="3" fill="#dfb76c"/>
-        <circle cx="68" cy="27" r="2.5" fill="#dfb76c"/>
-        <circle cx="80" cy="40" r="2" fill="#dfb76c"/>
-        <path d="M10,10 Q20,60 40,90" stroke="#d97d56" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <path d="M17,45 C10,48 10,58 17,55 C22,50 20,42 17,45 Z" fill="#d97d56" opacity="0.9"/>
-        <path d="M29,68 C22,72 24,82 29,78 C33,73 32,65 29,68 Z" fill="#d97d56" opacity="0.9"/>
+    <!-- ----------------------------------------------------
+         HAND-DRAWN ORGANIC BOTANICAL ILLUSTRATIONS (SVG)
+         ---------------------------------------------------- -->
+    
+    <!-- Top-Left Foliage -->
+    <svg class="floral-corner floral-top-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sage Eucalyptus Leaves (Organic, rounded hand-drawn shapes) -->
+        <path d="M12,12 C28,35 45,55 52,78" stroke="#7d8c77" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M22,25 C14,15 5,19 7,27 C10,35 18,33 22,25 Z" fill="#a3b19b" opacity="0.9"/>
+        <path d="M30,37 C20,28 12,34 15,42 C18,50 26,46 30,37 Z" fill="#a3b19b" opacity="0.9"/>
+        <path d="M38,50 C29,43 23,50 25,57 C27,64 35,59 38,50 Z" fill="#a3b19b" opacity="0.9"/>
+        <path d="M44,64 C36,59 31,65 33,71 C35,77 42,72 44,64 Z" fill="#92a08a" opacity="0.9"/>
+
+        <!-- Organic Rust-Orange Blooms -->
+        <path d="M12,12 C18,45 28,70 32,88" stroke="#d97d56" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 3"/>
+        <path d="M18,48 C11,46 8,56 14,60 C19,63 24,53 18,48 Z" fill="#d97d56" opacity="0.95"/>
+        <path d="M25,69 C18,67 16,77 22,81 C27,84 31,74 25,69 Z" fill="#cf7049" opacity="0.95"/>
+        
+        <!-- Gold Accent Twigs -->
+        <path d="M12,12 C35,18 62,28 78,38" stroke="#dfb76c" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="45" cy="18" r="3.5" fill="#dfb76c" opacity="0.95"/>
+        <circle cx="60" cy="23" r="3" fill="#dfb76c" opacity="0.95"/>
+        <circle cx="72" cy="31" r="2.5" fill="#dfb76c" opacity="0.95"/>
     </svg>
 
-    <svg class="bg-floral bg-floral-bottom-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10,10 Q35,40 50,80" stroke="#7d8c77" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M22,25 Q12,12 8,22 Q15,30 22,25" fill="#a3b19b" opacity="0.85"/>
-        <path d="M33,39 Q18,32 18,42 Q25,48 33,39" fill="#a3b19b" opacity="0.85"/>
-        <path d="M42,54 Q30,51 32,61 Q40,62 42,54" fill="#a3b19b" opacity="0.85"/>
-        <path d="M10,10 Q50,20 80,40" stroke="#dfb76c" stroke-width="1" stroke-linecap="round"/>
-        <circle cx="50" cy="18" r="3" fill="#dfb76c"/>
-        <circle cx="68" cy="27" r="2.5" fill="#dfb76c"/>
-        <circle cx="80" cy="40" r="2" fill="#dfb76c"/>
-        <path d="M10,10 Q20,60 40,90" stroke="#d97d56" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <path d="M17,45 C10,48 10,58 17,55 C22,50 20,42 17,45 Z" fill="#d97d56" opacity="0.9"/>
-        <path d="M29,68 C22,72 24,82 29,78 C33,73 32,65 29,68 Z" fill="#d97d56" opacity="0.9"/>
+    <!-- Bottom-Right Foliage -->
+    <svg class="floral-corner floral-bottom-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12,12 C28,35 45,55 52,78" stroke="#7d8c77" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M22,25 C14,15 5,19 7,27 C10,35 18,33 22,25 Z" fill="#a3b19b" opacity="0.9"/>
+        <path d="M30,37 C20,28 12,34 15,42 C18,50 26,46 30,37 Z" fill="#a3b19b" opacity="0.9"/>
+        <path d="M38,50 C29,43 23,50 25,57 C27,64 35,59 38,50 Z" fill="#a3b19b" opacity="0.9"/>
+        <path d="M44,64 C36,59 31,65 33,71 C35,77 42,72 44,64 Z" fill="#92a08a" opacity="0.9"/>
+
+        <path d="M12,12 C18,45 28,70 32,88" stroke="#d97d56" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 3"/>
+        <path d="M18,48 C11,46 8,56 14,60 C19,63 24,53 18,48 Z" fill="#d97d56" opacity="0.95"/>
+        <path d="M25,69 C18,67 16,77 22,81 C27,84 31,74 25,69 Z" fill="#cf7049" opacity="0.95"/>
+        
+        <path d="M12,12 C35,18 62,28 78,38" stroke="#dfb76c" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="45" cy="18" r="3.5" fill="#dfb76c" opacity="0.95"/>
+        <circle cx="60" cy="23" r="3" fill="#dfb76c" opacity="0.95"/>
+        <circle cx="72" cy="31" r="2.5" fill="#dfb76c" opacity="0.95"/>
+    </svg>
+
+    <!-- Top-Right Background Accent -->
+    <svg class="floral-background-accent floral-accent-top-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10,10 C25,30 40,45 48,65" stroke="#a3b19b" stroke-width="1" stroke-linecap="round"/>
+        <path d="M18,20 C10,12 3,15 5,21 C8,27 14,25 18,20 Z" fill="#a3b19b" opacity="0.6"/>
+        <path d="M25,30 C18,22 11,25 13,31 C16,37 22,35 25,30 Z" fill="#a3b19b" opacity="0.6"/>
+        <path d="M10,10 C30,15 50,22 62,30" stroke="#dfb76c" stroke-width="0.8" stroke-linecap="round"/>
+        <circle cx="35" cy="13" r="2" fill="#dfb76c" opacity="0.7"/>
+        <circle cx="48" cy="17" r="1.8" fill="#dfb76c" opacity="0.7"/>
+    </svg>
+
+    <!-- Bottom-Left Background Accent -->
+    <svg class="floral-background-accent floral-accent-bottom-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10,10 C25,30 40,45 48,65" stroke="#a3b19b" stroke-width="1" stroke-linecap="round"/>
+        <path d="M18,20 C10,12 3,15 5,21 C8,27 14,25 18,20 Z" fill="#a3b19b" opacity="0.6"/>
+        <path d="M25,30 C18,22 11,25 13,31 C16,37 22,35 25,30 Z" fill="#a3b19b" opacity="0.6"/>
+        <path d="M10,10 C30,15 50,22 62,30" stroke="#dfb76c" stroke-width="0.8" stroke-linecap="round"/>
+        <circle cx="35" cy="13" r="2" fill="#dfb76c" opacity="0.7"/>
+        <circle cx="48" cy="17" r="1.8" fill="#dfb76c" opacity="0.7"/>
     </svg>
 
 
+    <!-- Main 3D Simulation Viewport -->
     <div class="invite-viewport-scene">
         
+        <!-- The Envelope Container -->
         <div class="envelope-wrapper" id="envelopeContainer">
+            <!-- The Top Lid Flap -->
             <div class="envelope-flap" id="envelopeLid"></div>
             
+            <!-- Invitation Card Insert (Tucked securely inside, shorter than envelope) -->
             <div class="invitation-card" id="inviteCard">
+                <!-- Outer Metallic Foil Gold Border Frame -->
                 <div class="gold-foil-border"></div>
 
                 <div class="card-inner-frame">
+                    <!-- Internal Card Corner Accent sprigs (delicate sage + gold) -->
                     <svg class="card-corner-floral card-floral-top-left" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5,5 Q15,20 25,35" stroke="#7d8c77" stroke-width="1" stroke-linecap="round"/>
                         <path d="M11,13 Q4,4 2,9 Q6,14 11,13" fill="#a3b19b"/>
@@ -376,7 +446,6 @@
                         <circle cx="25" cy="10" r="2" fill="#dfb76c"/>
                         <path d="M5,5 Q20,10 35,15" stroke="#dfb76c" stroke-width="0.8"/>
                         <circle cx="35" cy="15" r="1.5" fill="#dfb76c"/>
-                        <path d="M8,22 C4,24 5,30 8,28 C11,26 10,21 8,22 Z" fill="#d97d56"/>
                     </svg>
 
                     <svg class="card-corner-floral card-floral-bottom-right" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -386,7 +455,6 @@
                         <circle cx="25" cy="10" r="2" fill="#dfb76c"/>
                         <path d="M5,5 Q20,10 35,15" stroke="#dfb76c" stroke-width="0.8"/>
                         <circle cx="35" cy="15" r="1.5" fill="#dfb76c"/>
-                        <path d="M8,22 C4,24 5,30 8,28 C11,26 10,21 8,22 Z" fill="#d97d56"/>
                     </svg>
 
                     <span class="card-caption">The Wedding Invitation</span>
@@ -405,11 +473,15 @@
             </div>
         </div>
 
+        <!-- Scroll Assistance Guidance Callout -->
         <div class="scroll-hint" id="scrollIndicator">
             Scroll Down to Open
         </div>
     </div>
 
+    <!-- ----------------------------------------------------
+         THE PARALLAX MECHANICAL VELOCITY LOGIC DRIVER ENGINE
+         ---------------------------------------------------- -->
     <script>
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
