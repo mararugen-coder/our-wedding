@@ -24,9 +24,6 @@
         }
 
         body {
-            /* Upload your custom background photo to GitHub and name it 'invitation-bg.jpg'.
-               It will stretch beautifully to cover the screen.
-            */
             background: #faf9f6 url('invitation-bg.jpg') no-repeat center center fixed; 
             background-size: cover;
             font-family: 'Montserrat', sans-serif;
@@ -57,7 +54,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #d97d56; /* Rust accent */
+            color: #d97d56;
             animation: bounceIndicator 2s infinite;
             text-align: center;
             pointer-events: none;
@@ -72,19 +69,15 @@
         .envelope-wrapper {
             position: relative;
             width: 460px;
-            height: 360px; /* Taller envelope to completely hold the card */
-            background-color: #34495e; /* Elegant slate blue base */
-            border-radius: 12px; /* Softened organic corners */
+            height: 400px; /* Made taller to perfectly harbor the cushioned card */
+            background-color: #34495e; 
+            border-radius: 12px;
             margin-top: 60px;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            
-            /* Realistic soft, deep floating shadow under the whole envelope structure */
             filter: drop-shadow(0 25px 35px rgba(44, 62, 80, 0.25));
         }
 
-        /* The Left, Right, and Bottom overlapping fold flap pockets.
-           We use clip-path to ensure the V-shape spans the absolute full width of the envelope!
-        */
+        /* Front overlapping fold pockets */
         .envelope-wrapper::before {
             content: '';
             position: absolute;
@@ -93,14 +86,9 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(to top, #2c3e50 30%, #34495e 100%);
-            z-index: 3; /* Keeps envelope front pockets stacked completely over the card */
-            border-radius: 12px; /* Matches outer container radius */
-            
-            /* clip-path Polygon coordinates:
-               Start at top-left (0 0), dip to the exact center (50% 50%), 
-               rise to top-right (100% 0), then seal down to the bottom corners.
-            */
-            clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+            z-index: 3; 
+            border-radius: 12px;
+            clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
         }
 
         /* Shimmering gold foil line pressed directly ON the front face of the envelope */
@@ -111,9 +99,9 @@
             right: 12px;
             bottom: 12px;
             pointer-events: none;
-            z-index: 3; /* Sits directly on top of the front pockets */
+            z-index: 3; 
             border-radius: 8px;
-            padding: 1px; /* Emulates a thin 1px border line */
+            padding: 1px;
             background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -130,9 +118,293 @@
             height: 0;
             border-left: 230px solid transparent;
             border-right: 230px solid transparent;
-            border-top: 180px solid #34495e; /* True matching slate blue */
+            border-top: 200px solid #34495e; /* Adjusted depth to match new envelope height */
             transform-origin: top center;
-            z-index: 4; /* Keeps flap stacked above card until flipped open */
+            z-index: 4; 
             transform: rotateX(0deg);
             will-change: transform;
-            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Gold foil edge line on the inner lip of the opening flap */
+        .envelope-flap::after {
+            content: '';
+            position: absolute;
+            top: -202px;
+            left: -230px;
+            width: 0;
+            height: 0;
+            border-left: 230px solid transparent;
+            border-right: 230px solid transparent;
+            border-top: 200px solid rgba(219, 183, 108, 0.4);
+            z-index: -1;
+            transform: scale(0.982) translateY(-2px);
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* ----------------------------------------------------
+           THE WEDDING INVITATION CARD (SPACIOUS & CUSHIONED)
+           ---------------------------------------------------- */
+        .invitation-card {
+            position: absolute;
+            top: 25px; 
+            left: 20px;
+            width: 420px;
+            height: 350px; /* Expanded height to ensure text is fully visible and roomy */
+            background-color: #ffffff;
+            z-index: 2; 
+            transform: translateY(0);
+            will-change: transform;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.5s ease;
+            border-radius: 4px;
+        }
+
+        /* Metallic Foil Gold Border Frame */
+        .gold-foil-border {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            pointer-events: none;
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%) 1;
+        }
+
+        /* Inner Content Frame Container */
+        .card-inner-frame {
+            width: 100%;
+            height: 100%;
+            padding: 45px 35px; /* Added luxury breathing space room around all edges */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Inner Card Typography & Cushioning Adjustments */
+        .card-caption {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #34495e;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        .card-title-block {
+            width: 100%;
+            margin: 15px 0; /* Creates an isolated dynamic block cushion */
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 400;
+            color: #7f8c8d;
+            margin-bottom: 16px; /* Space underneath the celebrate intro line */
+        }
+
+        .card-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #34495e;
+            line-height: 1.3;
+            margin-bottom: 16px; /* Space underneath the couple's names */
+        }
+
+        .card-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #d97d56; 
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .card-location {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: #555555;
+            text-transform: uppercase;
+            line-height: 1.5;
+            font-weight: 300;
+            width: 100%;
+        }
+
+        /* Gold Foil Button link to Homepage */
+        .card-cta-link {
+            display: inline-block;
+            padding: 12px 32px; /* Plentiful button cushion framing */
+            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #aa771c 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(170, 119, 28, 0.25);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .card-cta-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(170, 119, 28, 0.45);
+        }
+
+        /* Animation Helpers */
+        @keyframes bounceIndicator {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        /* ----------------------------------------------------
+           RESPONSIVE MOBILE GRAPHIC CONTAINER SCALING
+           ---------------------------------------------------- */
+        @media (max-width: 500px) {
+            .envelope-wrapper {
+                width: 320px;
+                height: 290px;
+                margin-top: 30px;
+                border-radius: 8px;
+            }
+            .envelope-wrapper::before {
+                border-radius: 8px;
+                clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+            }
+            .envelope-gold-line {
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+                border-radius: 6px;
+            }
+            .envelope-flap {
+                border-left-width: 160px;
+                border-right-width: 160px;
+                border-top-width: 145px;
+            }
+            .envelope-flap::after {
+                border-left-width: 160px;
+                border-right-width: 160px;
+                border-top-width: 145px;
+                top: -147px;
+                left: -160px;
+            }
+            .invitation-card {
+                width: 290px;
+                height: 250px;
+                left: 15px;
+                top: 20px;
+            }
+            .card-inner-frame { padding: 25px 15px; }
+            .card-names { font-size: 1.6rem; margin-bottom: 10px; }
+            .card-title { margin-bottom: 10px; }
+            .card-date { font-size: 1.2rem; }
+            .card-location { font-size: 0.65rem; }
+            .card-cta-link { padding: 8px 20px; font-size: 0.65rem; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invite-viewport-scene">
+        
+        <div class="envelope-wrapper" id="envelopeContainer">
+            <div class="envelope-flap" id="envelopeLid"></div>
+
+            <div class="envelope-gold-line" id="envelopeGoldLine"></div>
+            
+            <div class="invitation-card" id="inviteCard">
+                <div class="gold-foil-border"></div>
+
+                <div class="card-inner-frame">
+                    <span class="card-caption">You're Invited</span>
+                    
+                    <div class="card-title-block">
+                        <h2 class="card-title">Celebrating the Marriage of</h2>
+                        <h1 class="card-names">Daryl and Mara Giglio</h1>
+                        <p class="card-date">07 . 24 . 27</p>
+                    </div>
+                    
+                    <p class="card-location">Idaho Falls, Idaho</p>
+                    
+                    <a href="index.html" class="card-cta-link">Learn More & RSVP</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint" id="scrollIndicator">
+            Scroll Down to Open
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const maxScroll = window.innerHeight;
+            
+            let percent = Math.min(scrollTop / maxScroll, 1);
+
+            const lid = document.getElementById('envelopeLid');
+            const card = document.getElementById('inviteCard');
+            const envelope = document.getElementById('envelopeContainer');
+            const hint = document.getElementById('scrollIndicator');
+            const envelopeLine = document.getElementById('envelopeGoldLine');
+
+            // 1. First 35% of scroll phase lifts the 3D top flap lid open
+            if (percent <= 0.35) {
+                let lidPercent = percent / 0.35; 
+                let degrees = lidPercent * 180; 
+                lid.style.transform = `rotateX(${degrees}deg)`;
+                lid.style.zIndex = '4'; 
+                card.style.transform = `translateY(0px)`;
+                envelopeLine.style.opacity = 0.85;
+            } 
+            // 2. Remaining 65% scroll sequence smoothly slides the card vertically UP out of the envelope
+            else {
+                lid.style.transform = `rotateX(180deg)`;
+                lid.style.zIndex = '1'; 
+
+                let cardPercent = (percent - 0.35) / 0.65;
+                
+                // Adjusted slide distances to safely present the newly cushioned card height
+                let slideDistance = window.innerWidth <= 500 ? -240 : -345;
+                let currentSlide = cardPercent * slideDistance;
+                
+                card.style.transform = `translateY(${currentSlide}px)`;
+                envelopeLine.style.opacity = Math.max(0, 0.85 - (cardPercent * 2.5));
+            }
+
+            // 3. Fade out the scrolling guide hint
+            if (percent > 0.08) {
+                hint.style.opacity = '0';
+            } else {
+                hint.style.opacity = '1';
+            }
+
+            // 4. Subtle shift down to dynamically center layout
+            if (percent > 0.75) {
+                let envelopePullPercent = (percent - 0.75) / 0.25;
+                let envelopeShift = envelopePullPercent * 50;
+                envelope.style.transform = `translateY(${envelopeShift}px)`;
+            } else {
+                envelope.style.transform = `translateY(0px)`;
+            }
+        });
+    </script>
+</body>
+</html>
