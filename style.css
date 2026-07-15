@@ -423,6 +423,6 @@ h2 {
 
     /* Mobile Only Background Focus Adjustment to center on Daryl */
     .parallax-bg {
-        background-position: 75% center !important;
+        background-position: 50% center !important;
     }
 }
