@@ -235,3 +235,16 @@ h2 {
     .hero-title { font-size: 3rem; }
     .hero-date { font-size: 2.2rem; }
 }
+
+/* Custom Logo Sizing Adjustments */
+.logo-image {
+    max-height: 60px; /* Limits the logo height so it doesn't distort the navbar */
+    width: auto;      /* Keeps your logo proportions perfectly proportional */
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.03); /* Adds a subtle, elegant zoom effect when hovered */
+}
