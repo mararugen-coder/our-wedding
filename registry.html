@@ -11,17 +11,17 @@
     <link rel="icon" href="favicon-white.png" type="image/png" media="(prefers-color-scheme: dark)">
 
     <style>
-        /* Custom Styles & Parallax Engine for Registry Page */
+        /* Custom Full-Screen Styles & Parallax Engine for Registry Page */
         .registry-hero {
             position: relative;
-            min-height: 75vh; /* Slightly taller to give the beautiful quote paragraphs breathing room */
+            height: 100vh; /* Scales the container block to take up the full screen height */
             width: 100%;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 140px 20px 80px 20px;
+            padding: 150px 20px 20px 20px;
             background-color: #2c3e50;
         }
 
@@ -30,8 +30,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 75vh;
-            /* You can change 'registry-hero.jpg' to 'hero-bg.jpg' if you want to reuse the home page photo! */
+            height: 100vh; /* Keeps the background layout stretched completely edge-to-edge */
             background: url('registry-hero.jpg') no-repeat center center;
             background-size: cover;
             z-index: 0;
@@ -48,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 62, 80, 0.5); /* Slightly darker overlay to ensure white text is highly readable */
+            background: rgba(44, 62, 80, 0.55); /* Elegant overlay protection mask */
             z-index: 1;
         }
 
@@ -61,7 +60,6 @@
             padding: 0 20px;
         }
 
-        /* Elegant serif text styling matching your screenshot design */
         .registry-message-top {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.65rem;
@@ -83,110 +81,59 @@
             opacity: 0.95;
         }
 
-        /* Main solid section blocking out the parallax layer below it */
-        .registry-main-content {
-            position: relative;
-            z-index: 10;
-            background-color: #faf9f6;
-            padding: 100px 40px;
-            text-align: center;
-        }
-
-        .registry-section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.6rem;
-            font-weight: 400;
-            color: #dfb76c; /* Elegant gold header */
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .registry-intro-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: #555555;
-            max-width: 600px;
-            margin: 0 auto 50px auto;
-            line-height: 1.8;
-        }
-
-        /* Gold Registry Button Grid */
-        .registry-links-grid {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .registry-button {
-            display: inline-block;
-            min-width: 220px;
-            padding: 15px 30px;
-            background-color: #dfb76c;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(223, 183, 108, 0.15);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .registry-button:hover {
-            background-color: #c9a054;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(223, 183, 108, 0.3);
-        }
-
         @keyframes registryImageScale {
             from { transform: scale(1.08); }
             to { transform: scale(1); }
         }
 
-        /* Responsive Breakpoints */
+        /* Responsive Mobile Layout Formatting */
         @media (max-width: 768px) {
-            .registry-hero { min-height: 85vh; padding-top: 120px; }
+            .registry-hero { padding-top: 120px; }
             .registry-message-top, 
-            .registry-message-bottom { font-size: 1.3rem; }
-            .registry-links-grid { flex-direction: column; align-items: center; }
-            .registry-button { width: 100%; max-width: 280px; }
+            .registry-message-bottom { 
+                font-size: 1.25rem; 
+                line-height: 1.5;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Premium Navigation Bar with Mobile Hamburger -->
     <nav class="navbar">
+        <!-- Hidden checkbox to track menu toggle state -->
         <input type="checkbox" id="menu-toggle" class="menu-checkbox">
         
+        <!-- Hamburger Icon (Left on Mobile) -->
         <label for="menu-toggle" class="hamburger-btn">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
         </label>
 
+        <!-- Navigation Links -->
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="story.html">Our Story</a>
             <a href="schedule.html">Schedule</a>
             <a href="travel.html">Travel & Stay</a>
-            <a href="registry.html">Registry</a>
+            <a href="registry.html" class="active">Registry</a>
         </div>
 
+        <!-- Centered Logo -->
         <div class="nav-logo">
             <a href="index.html">
                 <img src="wedding-logo.png" alt="Daryl and Mara Wedding Logo" class="logo-image">
             </a>
         </div>
 
+        <!-- RSVP Button (Right on Mobile) -->
         <div class="nav-rsvp">
             <a href="https://mararugen.com/wedding-rsvp" target="_blank" class="rsvp-top-button">RSVP</a>
         </div>
     </nav>
 
+    <!-- Full-Screen Parallax Layout Structure -->
     <header class="registry-hero">
         <div class="registry-parallax-bg"></div>
         <div class="registry-hero-overlay"></div>
