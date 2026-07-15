@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are Invited — Celebrating the Giglios</title>
+    <!-- Fonts matching the rest of your beautiful premium site layout -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf9f6; /* Matching your signature warm off-white */
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            height: 200vh; /* Extra scroll runway room to fuel the mechanical scroll animation smoothly */
+        }
+
+        /* Fixed frame context hosting the visual simulation container scene */
+        .invite-viewport-scene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px; /* Essential 3D depth context for the realistic folding flap */
+            z-index: 10;
+        }
+
+        /* Scroll Progress Hint Tracker Callout Indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #7f8c8d;
+            animation: bounceIndicator 2s infinite;
+            text-align: center;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        /* ----------------------------------------------------
+           THE INTERACTIVE ENVELOPE MACHINE LAYERS
+           ---------------------------------------------------- */
+        .envelope-wrapper {
+            position: relative;
+            width: 450px;
+            height: 320px;
+            background-color: #2c3e50; /* Elegant slate blue base matching your aesthetic theme palette */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            margin-top: 50px;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* The Left, Right, and Bottom Flaps built using seamless overlay dimensions */
+        .envelope-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(315deg, #34495e 50%, transparent 50%),
+                        linear-gradient(45deg, #34495e 50%, transparent 50%),
+                        linear-gradient(to top, #2c3e50 40%, #34495e 100%);
+            z-index: 3; /* Keeps the pocket side edges sitting over the card insert */
+        }
+
+        /* The Top Triangular Unfolding Lid Flap */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 225px solid transparent;
+            border-right: 225px solid transparent;
+            border-top: 160px solid #2c3e50; /* Rich solid peak point */
+            transform-origin: top center;
+            z-index: 4; /* Sits completely on top to hide card until pulled open */
+            transform: rotateX(0deg);
+            will-change: transform;
+            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1));
+        }
+
+        /* ----------------------------------------------------
+           THE WEDDING INVITATION CARD INSERT LAYER
+           ---------------------------------------------------- */
+        .invitation-card {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            width: 410px;
+            height: 560px; /* Taller card profile sliding upward vertically */
+            background-color: #ffffff;
+            border: 1px solid rgba(212, 175, 55, 0.25); /* Fine subtle gold border detail boundary edge */
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            z-index: 2; /* Sandwiched behind the side envelope pocket but above the back background panel */
+            transform: translateY(0);
+            will-change: transform;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Custom Inner Decorative Border Rim Frame Outline Line Box styling */
+        .card-inner-frame {
+            border: 1px solid #dfb76c;
+            width: 100%;
+            height: 100%;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Typography Styling details mirroring your clean elegant layout look */
+        .card-caption {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #7f8c8d;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.3rem;
+            font-weight: 300;
+            color: #34495e;
+            line-height: 1.2;
+            margin: 15px 0;
+        }
+
+        .card-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: #dfb76c;
+            letter-spacing: 1px;
+        }
+
+        .card-location {
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: #555555;
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+        /* The Premium Navigation Link Gateway Action Trigger Block */
+        .card-cta-link {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: #dfb76c;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(223, 183, 108, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card-cta-link:hover {
+            background-color: #c9a054;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(223, 183, 108, 0.35);
+        }
+
+        /* Animation Keyframe definitions */
+        @keyframes bounceIndicator {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        /* ----------------------------------------------------
+           RESPONSIVE MOBILE GRAPHIC CONTAINER FRAME SCALING
+           ---------------------------------------------------- */
+        @media (max-width: 500px) {
+            .envelope-wrapper {
+                width: 320px;
+                height: 240px;
+            }
+            .envelope-flap {
+                border-left-width: 160px;
+                border-right-width: 160px;
+                border-top-width: 120px;
+            }
+            .invitation-card {
+                width: 290px;
+                height: 440px;
+                left: 15px;
+                top: 10px;
+                padding: 30px 15px;
+            }
+            .card-inner-frame { padding: 25px 10px; }
+            .card-title { font-size: 1.7rem; }
+            .card-date { font-size: 1.3rem; }
+            .card-location { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scroll Context Scene Viewport Anchor Framework Box -->
+    <div class="invite-viewport-scene">
+        
+        <!-- The Envelope Container Box -->
+        <div class="envelope-wrapper" id="envelopeContainer">
+            <!-- The Top Lid Flap -->
+            <div class="envelope-flap" id="envelopeLid"></div>
+            
+            <!-- Inside Invitation Insert Card Panel -->
+            <div class="invitation-card" id="inviteCard">
+                <div class="card-inner-frame">
+                    <span class="card-caption">The Wedding Invitation</span>
+                    <div>
+                        <h1 class="card-title">Celebrating<br>the Giglios</h1>
+                        <p class="card-date">07 . 24 . 27</p>
+                    </div>
+                    <p class="card-location">
+                        Flagstaff, Arizona<br>
+                        <!-- Rest of the locations details can sit nicely here -->
+                    </p>
+                    <!-- Link straight back into the fully responsive standard homepage framework index file link -->
+                    <a href="index.html" class="card-cta-link">Enter Website</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Floating Scroll Assist Prompt -->
+        <div class="scroll-hint" id="scrollIndicator">
+            Scroll Down to Open
+        </div>
+    </div>
+
+    <!-- ----------------------------------------------------
+         THE PARALLAX MECHANICAL VELOCITY LOGIC DRIVER ENGINE
+         ---------------------------------------------------- -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const maxScroll = window.innerHeight; // Animation spans the length of one complete viewport transition scroll height
+            
+            // Calculate a unified decimal progression percentage value tracking indicator boundary path marker
+            let percent = Math.min(scrollTop / maxScroll, 1);
+
+            const lid = document.getElementById('envelopeLid');
+            const card = document.getElementById('inviteCard');
+            const envelope = document.getElementById('envelopeContainer');
+            const hint = document.getElementById('scrollIndicator');
+
+            // 1. First 40% of scroll phase dictates the mechanical 3D lifting extension track execution of the flap lid lid cover
+            if (percent <= 0.4) {
+                let lidPercent = percent / 0.4; // Local normalized reference scale 
+                let degrees = lidPercent * 180; // Pivots standard horizontal degree alignment framework
+                lid.style.transform = `rotateX(${degrees}deg)`;
+                lid.style.zIndex = '4'; // Remains stacked forward above the card boundary line
+                card.style.transform = `translateY(0px)`;
+            } 
+            // 2. Remaining 60% scroll sequence initiates the vertical rising slide execution track of the card frame assembly context
+            else {
+                lid.style.transform = `rotateX(180deg)`;
+                lid.style.zIndex = '1'; // Drops behind the base frame so it looks like it came out of the inside deep pocket cavity context
+
+                let cardPercent = (percent - 0.4) / 0.6;
+                
+                // Adjusts distance the card climbs out based on mobile vs desktop dimension proportions
+                let slideDistance = window.innerWidth <= 500 ? -240 : -340;
+                let currentSlide = cardPercent * slideDistance;
+                
+                card.style.transform = `translateY(${currentSlide}px)`;
+            }
+
+            // 3. Gracefully ease out the scrolling baseline guidance indicator opacity once active track manipulation tracking initiates
+            if (percent > 0.1) {
+                hint.style.opacity = '0';
+            } else {
+                hint.style.opacity = '1';
+            }
+
+            // 4. Subtle macro adjustment shifting the whole framework down slightly once fully deployed to frame card perfectly center
+            if (percent > 0.8) {
+                let envelopePullPercent = (percent - 0.8) / 0.2;
+                let envelopeShift = envelopePullPercent * 60;
+                envelope.style.transform = `translateY(${envelopeShift}px)`;
+            } else {
+                envelope.style.transform = `translateY(0px)`;
+            }
+        });
+    </script>
+</body>
+</html>
