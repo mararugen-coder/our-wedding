@@ -420,4 +420,9 @@ h2 {
     .info-section {
         margin-bottom: 80px;
     }
+
+    /* Mobile Only Background Focus Adjustment to center on Daryl */
+    .parallax-bg {
+        background-position: 75% center !important;
+    }
 }
