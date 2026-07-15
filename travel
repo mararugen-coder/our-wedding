@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Stay — Celebrating the Giglios</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Premium serif and modern sans-serif fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Adaptive Favicons for Light and Dark Modes -->
+    <link rel="icon" href="favicon-black.png" type="image/png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="favicon-white.png" type="image/png" media="(prefers-color-scheme: dark)">
+
+    <style>
+        /* Custom Parallax & Column Styles for Travel Page */
+        .travel-hero {
+            position: relative;
+            height: 60vh; /* Shorter, elegant header height matching the screenshot */
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 90px;
+            background-color: #2c3e50;
+        }
+
+        .travel-parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60vh;
+            background: url('travel-hero.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: 0;
+            animation: travelImageScale 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @media (pointer: coarse) {
+            .travel-parallax-bg { position: absolute; }
+        }
+
+        .travel-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.45); /* Elegant tinted shade screen */
+            z-index: 1;
+        }
+
+        .travel-hero-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+
+        .travel-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .travel-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        /* Main solid section blocking out the parallax layer below it */
+        .travel-main-content {
+            position: relative;
+            z-index: 10;
+            background-color: #faf9f6;
+            padding: 90px 40px;
+            text-align: center;
+        }
+
+        .lodging-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 400;
+            color: #dfb76c; /* Warm luxury gold script color */
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        /* 3-Column Grid Structural Base */
+        .lodging-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .lodging-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .category-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #dfb76c;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .lodging-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #555555;
+            max-width: 280px;
+        }
+
+        .venue-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #dfb76c;
+            margin-bottom: 10px;
+        }
+
+        .address-block {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            font-weight: 300;
+            color: #555555;
+        }
+
+        /* Custom Wide Gold Block Button */
+        .lodging-cta {
+            display: inline-block;
+            width: 100%;
+            max-width: 280px;
+            padding: 15px 0;
+            margin-top: 30px;
+            background-color: #dfb76c;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .lodging-cta:hover {
+            background-color: #c9a054;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(223, 183, 108, 0.3);
+        }
+
+        @keyframes travelImageScale {
+            from { transform: scale(1.08); }
+            to { transform: scale(1); }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .lodging-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .travel-title { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Premium Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="story.html">Our Story</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="travel.html" class="active">Travel & Stay</a>
+            <a href="registry.html">Registry</a>
+        </div>
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="wedding-logo.png" alt="Daryl and Mara Wedding Logo" class="logo-image">
+            </a>
+        </div>
+        <div class="nav-rsvp">
+            <a href="https://mararugen.com/wedding-rsvp" target="_blank" class="rsvp-top-button">RSVP</a>
+        </div>
+    </nav>
+
+    <!-- Parallax Hero Layout -->
+    <header class="travel-hero">
+        <div class="travel-parallax-bg"></div>
+        <div class="travel-hero-overlay"></div>
+        <div class="travel-hero-content">
+            <h1 class="travel-title">Travel & Stay</h1>
+            <p class="travel-subtitle">Most events will be taking place nearby.</p>
+        </div>
+    </header>
+
+    <!-- Lower Content Workspace -->
+    <main class="travel-main-content">
+        <h2 class="lodging-title">Lodging Recommendations</h2>
+
+        <div class="lodging-grid">
+            <!-- Column 1: Bed & Breakfast -->
+            <div class="lodging-column">
+                <span class="category-label">Bed & Breakfast</span>
+                <p class="lodging-text">
+                    Please let us know if you are looking for accommodations. Here are our recommendations:
+                </p>
+                <a href="#" class="lodging-cta">View Lodging</a>
+            </div>
+
+            <!-- Column 2: Hotel Block -->
+            <div class="lodging-column">
+                <span class="category-label">Hotel</span>
+                <h3 class="venue-name">The Elk Inn</h3>
+                <p class="address-block">
+                    123 Demo Street<br>
+                    Flagstaff, AZ 12345<br>
+                    (555) 555-5555
+                </p>
+            </div>
+
+            <!-- Column 3: Cabin Block -->
+            <div class="lodging-column">
+                <span class="category-label">Cabin</span>
+                <h3 class="venue-name">Riverside Cottage</h3>
+                <p class="address-block">
+                    123 Demo Street<br>
+                    Flagstaff, AZ 12345<br>
+                    (555) 555-5555
+                </p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
