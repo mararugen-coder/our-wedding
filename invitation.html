@@ -69,7 +69,7 @@
         }
 
         /* ----------------------------------------------------
-           THE ENVELOPE (MATTE SLATE BLUE & GOLD FOIL TRIMMED)
+           THE ENVELOPE (MATTE SLATE BLUE & ROUNDED & SOFT SHADOW)
            ---------------------------------------------------- */
         .envelope-wrapper {
             position: relative;
@@ -79,10 +79,6 @@
             border-radius: 12px; /* Softened organic corners */
             margin-top: 60px;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            
-            /* Gold foil border outlining the entire rectangular envelope container */
-            border: 2px solid transparent;
-            border-image: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%) 1;
             
             /* Realistic soft, deep floating shadow under the whole envelope structure */
             filter: drop-shadow(0 25px 35px rgba(44, 62, 80, 0.25));
@@ -101,10 +97,26 @@
                         linear-gradient(45deg, #2c3e50 50%, transparent 50%),
                         linear-gradient(to top, #34495e 30%, #3d566e 100%);
             z-index: 3; /* Keeps envelope front pockets stacked completely over the card */
-            border-radius: 10px; /* Matches slightly inside outer container radius */
-            
-            /* Elegant gold foil trim outlining the top edges of the lower overlapping fold pocket lines */
-            border-bottom: 2px solid rgba(219, 183, 108, 0.35); 
+            border-radius: 12px; /* Matches outer container radius */
+            border-bottom: 2px solid rgba(219, 183, 108, 0.25); /* Subtle gold foil baseline trim */
+        }
+
+        /* Shimmering gold foil line pressed directly ON the front face of the envelope */
+        .envelope-gold-line {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            pointer-events: none;
+            z-index: 3; /* Sits directly on top of the front pockets */
+            border-radius: 8px;
+            padding: 1px; /* Emulates a thin 1px border line */
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.85;
         }
 
         /* The Top Open Flap (Slate Blue interior, Gold foil outer peak trim) */
@@ -125,7 +137,7 @@
             border-radius: 8px 8px 0 0; /* Rounds the top folding point of the lid */
         }
 
-        /* Gold foil edge line on the outer lip of the opening flap */
+        /* Gold foil edge line on the inner lip of the opening flap */
         .envelope-flap::after {
             content: '';
             position: absolute;
@@ -135,7 +147,7 @@
             height: 0;
             border-left: 230px solid transparent;
             border-right: 230px solid transparent;
-            border-top: 180px solid rgba(219, 183, 108, 0.6); /* Vibrant gold foil accent */
+            border-top: 180px solid rgba(219, 183, 108, 0.4);
             z-index: -1;
             transform: scale(0.982) translateY(-2px);
             border-radius: 8px 8px 0 0;
@@ -265,6 +277,13 @@
             .envelope-wrapper::before {
                 border-radius: 8px;
             }
+            .envelope-gold-line {
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+                border-radius: 6px;
+            }
             .envelope-flap {
                 border-left-width: 160px;
                 border-right-width: 160px;
@@ -300,6 +319,9 @@
         <div class="envelope-wrapper" id="envelopeContainer">
             <!-- The Top Lid Flap -->
             <div class="envelope-flap" id="envelopeLid"></div>
+
+            <!-- Delicate Gold Foil Line pressed ON the face of the envelope -->
+            <div class="envelope-gold-line" id="envelopeGoldLine"></div>
             
             <!-- Invitation Card Insert (Tucked securely inside, shorter than envelope) -->
             <div class="invitation-card" id="inviteCard">
@@ -344,6 +366,7 @@
             const card = document.getElementById('inviteCard');
             const envelope = document.getElementById('envelopeContainer');
             const hint = document.getElementById('scrollIndicator');
+            const envelopeLine = document.getElementById('envelopeGoldLine');
 
             // 1. First 35% of scroll phase lifts the 3D top flap lid open
             if (percent <= 0.35) {
@@ -352,6 +375,9 @@
                 lid.style.transform = `rotateX(${degrees}deg)`;
                 lid.style.zIndex = '4'; // Remains stacked forward above the card
                 card.style.transform = `translateY(0px)`;
+                
+                // Keep the front envelope gold foil line visible on the front pocket face
+                envelopeLine.style.opacity = 0.85;
             } 
             // 2. Remaining 65% scroll sequence smoothly slides the card vertically UP out of the envelope
             else {
@@ -365,6 +391,9 @@
                 let currentSlide = cardPercent * slideDistance;
                 
                 card.style.transform = `translateY(${currentSlide}px)`;
+                
+                // Softly fade out the envelope face gold foil line as the card slides up over it
+                envelopeLine.style.opacity = Math.max(0, 0.85 - (cardPercent * 2.5));
             }
 
             // 3. Fade out the scrolling guide hint
