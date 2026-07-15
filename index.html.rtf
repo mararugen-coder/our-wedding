@@ -3,55 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daryl & Mara Giglio</title>
+    <title>Celebrating the Giglios</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Elegant Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <!-- Premium serif and modern sans-serif fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <header class="hero">
+    <!-- Premium Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#story">Our Story</a>
+            <a href="#travel">Travel & Stay</a>
+            <a href="#registry">Registry</a>
+        </div>
+        
+        <!-- Custom Initials Monogram -->
+        <div class="nav-logo">
+            <span class="logo-main">D&M</span>
+        </div>
+        
+        <div class="nav-rsvp">
+            <a href="https://mararugen.com/wedding-rsvp" target="_blank" class="rsvp-top-button">RSVP</a>
+        </div>
+    </nav>
+
+    <!-- Full-Screen Hero Section -->
+    <header id="home" class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="names">Celebrating the Giglio's</h1>
-            <p class="date">07 . 00 . 2027</p>
-            <p class="location">Idaho Falls, ID</p>
-            <a href="https://mararugen.com/wedding-rsvp" target="_blank" class="cta-button">RSVP Online</a>        </div>
+            <h1 class="hero-title animate-fade-up">Celebrating the Giglio's</h1>
+            <p class="hero-date animate-fade-up-delay">07 . __ . 27</p>
+        </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Content Container for sections below the fold -->
     <main class="content-container">
         
-        <!-- Schedule Section -->
-        <section id="details" class="info-section">
-            <h2>The Celebration</h2>
-            <p class="subtitle">Join us for our wedding day</p>
+        <!-- Our Story Section -->
+        <section id="story" class="info-section">
+            <h2>Our Story</h2>
+            <p class="subtitle">From the mountains to the city</p>
             <hr class="divider">
-            <div class="schedule-grid">
-                <div class="event-card">
-                    <h3>Ceremony</h3>
-                    <p class="time">4:30 PM</p>
-                    <p class="venue">The Intimate Chapel</p>
-                </div>
-                <div class="event-card">
-                    <h3>Reception</h3>
-                    <p class="time">6:00 PM</p>
-                    <p class="venue">Grand Ballroom Celebration</p>
-                </div>
-            </div>
+            <p class="section-text">We're so excited to share our next grand adventure with you all.</p>
         </section>
 
         <!-- Travel Section -->
         <section id="travel" class="info-section">
-            <h2>Where to Stay</h2>
-            <p class="subtitle">Accommodations for our out-of-town guests</p>
+            <h2>Travel & Stay</h2>
+            <p class="subtitle">Accommodations & local spots</p>
             <hr class="divider">
             <div class="event-card">
-                <h3>The Boutique Hotel Block</h3>
-                <p class="venue">We have a block of rooms reserved under our names. Please book by July 1st to receive the community discount rate.</p>
-                <br>
-                <p class="venue"><em>Local Tip:</em> Be sure to check out some of our favorite local specialty coffee shops nearby during your downtime!</p>
+                <h3>Hotel Block</h3>
+                <p class="venue">Details coming soon! Keep an eye out for local specialty coffee shop recommendations near our venue options.</p>
             </div>
         </section>
 
@@ -60,20 +65,7 @@
             <h2>Registry</h2>
             <p class="subtitle">Thank you for supporting our next chapter</p>
             <hr class="divider">
-            <p class="venue">Your presence is our present, but if you wish to help us celebrate with a gift, you can view our registry funds here:</p>
-            <br>
-            <a href="#" target="_blank" class="cta-button" style="color: #333; border-color: #333;">View Registry</a>
-        </section>
-
-        <!-- RSVP Form Section -->
-        <section id="rsvp" class="rsvp-section">
-            <h2>Kindly Reply</h2>
-            <p class="subtitle">Please let us know by July 1st</p>
-            <hr class="divider">
-            <div class="form-wrapper">
-                <!-- Swap this placeholder out once you have your actual Tally or Google Form iframe link -->
-                <p class="venue">RSVP form coming soon.</p>
-            </div>
+            <a href="#" target="_blank" class="cta-button">View Registry</a>
         </section>
         
     </main>
