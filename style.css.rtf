@@ -1,165 +1,237 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+/* Color Palette & Base Resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-\f0\fs24 \cf0 * \{\
-    margin: 0;\
-    padding: 0;\
-    box-sizing: border-box;\
-\}\
-\
-html \{\
-    scroll-behavior: smooth;\
-\}\
-\
-body \{\
-    font-family: 'Montserrat', sans-serif;\
-    color: #333333;\
-    line-height: 1.6;\
-    background-color: #faf9f6;\
-\}\
-\
-.hero \{\
-    position: relative;\
-    height: 100vh;\
-    width: 100%;\
-    background: url('hero-bg.jpg') no-repeat center center/cover;\
-    display: flex;\
-    justify-content: center;\
-    align-items: center;\
-    text-align: center;\
-\}\
-\
-.hero-overlay \{\
-    position: absolute;\
-    top: 0;\
-    left: 0;\
-    width: 100%;\
-    height: 100vh;\
-    background: rgba(0, 0, 0, 0.25);\
-    z-index: 1;\
-\}\
-\
-.hero-content \{\
-    position: relative;\
-    z-index: 2;\
-    color: #ffffff;\
-\}\
-\
-.names \{\
-    font-family: 'Cormorant Garamond', serif;\
-    font-size: 4.5rem;\
-    font-weight: 300;\
-    letter-spacing: 2px;\
-    margin-bottom: 10px;\
-\}\
-\
-.date \{\
-    font-size: 1.2rem;\
-    letter-spacing: 5px;\
-    margin-bottom: 5px;\
-    font-weight: 300;\
-\}\
-\
-.location \{\
-    font-size: 1rem;\
-    letter-spacing: 3px;\
-    margin-bottom: 30px;\
-    font-weight: 200;\
-    text-transform: uppercase;\
-\}\
-\
-.cta-button \{\
-    display: inline-block;\
-    padding: 12px 35px;\
-    background-color: transparent;\
-    color: #ffffff;\
-    border: 1px solid #ffffff;\
-    text-decoration: none;\
-    letter-spacing: 2px;\
-    font-size: 0.85rem;\
-    text-transform: uppercase;\
-    transition: all 0.3s ease;\
-\}\
-\
-.cta-button:hover \{\
-    background-color: #ffffff;\
-    color: #333333;\
-\}\
-\
-.content-container \{\
-    max-width: 900px;\
-    margin: 0 auto;\
-    padding: 80px 20px;\
-\}\
-\
-.info-section, .rsvp-section \{\
-    text-align: center;\
-    margin-bottom: 100px;\
-\}\
-\
-h2 \{\
-    font-family: 'Cormorant Garamond', serif;\
-    font-size: 2.5rem;\
-    font-weight: 400;\
-    letter-spacing: 1px;\
-\}\
-\
-.subtitle \{\
-    font-size: 0.9rem;\
-    font-style: italic;\
-    font-family: 'Cormorant Garamond', serif;\
-    color: #777777;\
-    margin-top: 5px;\
-\}\
-\
-.divider \{\
-    width: 60px;\
-    height: 1px;\
-    background-color: #cccccc;\
-    border: none;\
-    margin: 25px auto;\
-\}\
-\
-.schedule-grid \{\
-    display: flex;\
-    justify-content: space-around;\
-    gap: 30px;\
-    margin-top: 40px;\
-\}\
-\
-.event-card h3 \{\
-    font-family: 'Cormorant Garamond', serif;\
-    font-size: 1.8rem;\
-    font-weight: 400;\
-    margin-bottom: 10px;\
-\}\
-\
-.event-card .time \{\
-    font-size: 0.9rem;\
-    letter-spacing: 1px;\
-    font-weight: 400;\
-    margin-bottom: 5px;\
-\}\
-\
-.event-card .venue \{\
-    font-size: 0.9rem;\
-    color: #666666;\
-    font-weight: 300;\
-\}\
-\
-.form-wrapper \{\
-    margin-top: 40px;\
-    background: #ffffff;\
-    padding: 20px;\
-    border-radius: 4px;\
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);\
-\}\
-\
-@media (max-width: 600px) \{\
-    .names \{ font-size: 3rem; \}\
-    .schedule-grid \{ flex-direction: column; gap: 40px; \}\
-\}}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #2b2b2b;
+    line-height: 1.6;
+    background-color: #faf9f6;
+}
+
+/* 1. Interactive & Sticky Sticky Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #34495e; /* Elegant deep blue-grey matching the image */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Very subtle gold separator boundary */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.nav-links a {
+    color: #dfb76c; /* Elegant muted gold font */
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    margin-right: 25px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #ffffff; /* Turns clean white on hover */
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 4px;
+}
+
+/* Centered Monogram / Logo text styling */
+.nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.logo-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #dfb76c;
+    letter-spacing: 4px;
+}
+
+/* Custom Gold Accent Button */
+.rsvp-top-button {
+    display: inline-block;
+    padding: 10px 28px;
+    background-color: #dfb76c;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.rsvp-top-button:hover {
+    background-color: #c9a054;
+    transform: translateY(-1px);
+}
+
+/* 2. Hero Background Layout */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 90px; /* Accounts for navbar height offset */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 62, 80, 0.35); /* Cool deep tint overlay to tie it to the navbar */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* 3. Smooth Visual Fade-In Keyframe Animations */
+.animate-fade-up {
+    animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    opacity: 0;
+}
+
+.animate-fade-up-delay {
+    animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Content & Block Styles */
+.content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 20px;
+}
+
+.info-section {
+    text-align: center;
+    margin-bottom: 120px;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.divider {
+    width: 50px;
+    height: 1px;
+    background-color: #dfb76c;
+    border: none;
+    margin: 25px auto;
+}
+
+.section-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #555;
+}
+
+.event-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.event-card .venue {
+    font-size: 0.95rem;
+    color: #666666;
+    font-weight: 300;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 35px;
+    background-color: transparent;
+    color: #34495e;
+    border: 1px solid #34495e;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+/* Responsive Mobile Layout Adjustments */
+@media (max-width: 768px) {
+    .navbar { padding: 0 20px; }
+    .nav-links a { margin-right: 12px; font-size: 0.75rem; }
+    .logo-main { font-size: 1.8rem; }
+    .hero-title { font-size: 3rem; }
+    .hero-date { font-size: 2.2rem; }
+}
