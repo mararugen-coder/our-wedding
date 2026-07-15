@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story — Celebrating the Giglios</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="favicon-black.png" type="image/png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="favicon-white.png" type="image/png" media="(prefers-color-scheme: dark)">
+
+    <style>
+        /* Custom Styles & Interactive Animations for the Story Page */
+        
+        /* 1. Deep Blue Header Block */
+        .story-header-block {
+            background-color: #34495e;
+            padding: 160px 20px 80px 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .story-header-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 1px;
+            color: #dfb76c;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: storyFadeUp 1s ease forwards;
+        }
+        
+        .story-main-photo-container {
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: scale(0.98);
+            animation: storyFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+        
+        .story-main-photo {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        
+        .story-main-photo-container:hover .story-main-photo {
+            transform: scale(1.02);
+        }
+
+        /* 2. Spacious Elegant Quotes Section */
+        .quotes-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 0 40px;
+        }
+        
+        .quote-block {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: storyFadeUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-style: italic;
+            color: #dfb76c;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        
+        .quote-author {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7f8c8d;
+            padding-left: 5px;
+        }
+
+        /* 3. Multi-Column Detailed Story Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 120px auto;
+            padding: 0 40px;
+        }
+        
+        .details-left {
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        /* Ring Photo Container */
+        .ring-photo-wrapper {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+        
+        .ring-photo {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        
+        .details-left:hover .ring-photo {
+            transform: scale(1.03);
+        }
+        
+        /* Elegant Gold Overlay Text */
+        .photo-overlay-text {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: #dfb76c;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        
+        /* Story Text Column */
+        .details-right {
+            padding-right: 20px;
+        }
+        
+        .story-paragraph {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #555555;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        /* 4. Infinite Horizontal Scrolling Gallery */
+        .gallery-section-title {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #34495e;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .scroll-gallery-viewport {
+            width: 100%;
+            overflow: hidden;
+            background-color: #faf9f6;
+            padding: 40px 0 100px 0;
+            position: relative;
+        }
+        
+        /* Continuous track wrapping the images (slowing it down to 35s for elegant pacing) */
+        .scroll-gallery-track {
+            display: flex;
+            width: max-content;
+            gap: 20px;
+            animation: scrollMarquee 35s linear infinite;
+        }
+        
+        /* Pause the scrolling animation when hovered */
+        .scroll-gallery-viewport:hover .scroll-gallery-track {
+            animation-play-state: paused;
+        }
+        
+        .gallery-item {
+            width: 380px;
+            height: 280px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(52, 73, 94, 0.15);
+        }
+
+        /* Visual Animations */
+        @keyframes storyFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scrollMarquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                /* Shifts the track by half of its loop length */
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Responsive Mobile Layout Adjustments */
+        @media (max-width: 768px) {
+            .story-header-block { padding-top: 120px; }
+            .story-header-title { font-size: 2.2rem; }
+            .quote-text { font-size: 1.6rem; }
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 20px;
+            }
+            .photo-overlay-text { font-size: 2rem; top: 20px; left: 20px; }
+            .gallery-item { width: 280px; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="story.html" class="active">Our Story</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="travel.html">Travel & Stay</a>
+            <a href="registry.html">Registry</a>
+        </div>
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="wedding-logo.png" alt="Daryl and Mara Wedding Logo" class="logo-image">
+            </a>
+        </div>
+        <div class="nav-rsvp">
+            <a href="https://mararugen.com/wedding-rsvp" target="_blank" class="rsvp-top-button">RSVP</a>
+        </div>
+    </nav>
+
+    <header class="story-header-block">
+        <h1 class="story-header-title">How it all began</h1>
+        <div class="story-main-photo-container">
+            <img src="story-hero.jpg" alt="Daryl and Mara in Grand Teton National Park" class="story-main-photo">
+        </div>
+    </header>
+
+    <main>
+        <section class="quotes-container">
+            <div class="quote-block">
+                <p class="quote-text">“I literally felt my heart skip a beat...she is gorgeous”</p>
+                <span class="quote-author">— Daryl</span>
+            </div>
+            
+            <div class="quote-block" style="text-align: right; padding-right: 40px;">
+                <p class="quote-text" style="text-align: left; display: inline-block;">“I thought, ‘what would one date hurt?’”</p>
+                <div style="text-align: left; display: block; width: 100%;"><span class="quote-author">— Mara</span></div>
+            </div>
+        </section>
+
+        <section class="details-grid">
+            <div class="details-left">
+                <div class="ring-photo-wrapper">
+                    <img src="story-ring.jpg" alt="Mara's Engagement Ring" class="ring-photo">
+                    <div class="photo-overlay-text">daryl & mara</div>
+                </div>
+            </div>
+            
+            <div class="details-right">
+                <p class="story-paragraph">
+                    It started, as the best ones often do, with a little nudge from a good friend. Mara was in Zack's chair getting her hair done, telling him she was single, unsure what was next, and half seriously entertaining the idea of moving to Texas to find a guy. Through a series of conversations that week, Zack thought Mara and Daryl might hit it off.
+                </p>
+                <p class="story-paragraph">
+                    The next day, while Mara was hanging out with Zack's wife, Erika, he casually floated the idea: there's this guy named Daryl, he'd love to take you on a date, here's a photo. Mara was hesitant. Then she thought, "what can it hurt?"
+                </p>
+                <p class="story-paragraph">
+                    That Thursday, Daryl picked her up for dinner. It was the end of March, and it was snowing because Idaho has a flair for the dramatic. They went to Smokin' Fins, had a lovely dinner, and the conversation never stopped. Genuine, intentional, and the kind you don't want to end. Neither of them wanted the night to be over.
+                </p>
+                <p class="story-paragraph">
+                    And then they just kept talking... and seeing each other... Every single day since. Things moved quickly, not because they were rushing, but because life together was clear and purposeful in a way that's rare and worth running toward. The laughter came easy, the love came easier, and before long, it was obvious. Mara wasn't moving to Texas. And some might say that's huge for the program.
+                </p>
+            </div>
+        </section>
+
+        <section style="margin-top: 100px;">
+            <h2 class="gallery-section-title">Our Adventures</h2>
+            <div class="scroll-gallery-viewport">
+                <div class="scroll-gallery-track">
+                    <div class="gallery-item"><img src="gallery1.jpg" alt="Adventure 1"></div>
+                    <div class="gallery-item"><img src="gallery2.jpg" alt="Adventure 2"></div>
+                    <div class="gallery-item"><img src="gallery3.jpg" alt="Adventure 3"></div>
+                    <div class="gallery-item"><img src="gallery4.jpg" alt="Adventure 4"></div>
+                    <div class="gallery-item"><img src="gallery5.jpg" alt="Adventure 5"></div>
+                    <div class="gallery-item"><img src="gallery6.jpg" alt="Adventure 6"></div>
+                    <div class="gallery-item"><img src="gallery7.jpg" alt="Adventure 7"></div>
+                    
+                    <div class="gallery-item"><img src="gallery1.jpg" alt="Adventure 1 Copy"></div>
+                    <div class="gallery-item"><img src="gallery2.jpg" alt="Adventure 2 Copy"></div>
+                    <div class="gallery-item"><img src="gallery3.jpg" alt="Adventure 3 Copy"></div>
+                    <div class="gallery-item"><img src="gallery4.jpg" alt="Adventure 4 Copy"></div>
+                    <div class="gallery-item"><img src="gallery5.jpg" alt="Adventure 5 Copy"></div>
+                    <div class="gallery-item"><img src="gallery6.jpg" alt="Adventure 6 Copy"></div>
+                    <div class="gallery-item"><img src="gallery7.jpg" alt="Adventure 7 Copy"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
