@@ -6,11 +6,24 @@
     <title>Celebrating the Giglios</title>
     <link rel="stylesheet" href="style.css">
     <!-- Premium serif and modern sans-serif fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     
     <!-- Adaptive Favicons for Light and Dark Modes -->
     <link rel="icon" href="favicon-black.png" type="image/png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="favicon-white.png" type="image/png" media="(prefers-color-scheme: dark)">
+
+    <style>
+        /* Optional: Smooth hover transitions for your clickable headers */
+        .header-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .header-link:hover {
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
 
@@ -53,43 +66,62 @@
         </div>
     </header>
 
-    <!-- Main Content Container for sections below the fold -->
-    <main class="content-container">
+    <!-- Main Content Container (Centered bottom portion) -->
+    <main class="content-container" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
 
         <!-- 2 part wedding story section -->
-            <h2>Our Two-Part Wedding Story</h2>
+        <section id="two-part-story" class="info-section" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
+            <!-- REPLACE 'schedule.html' WITH YOUR PAGE LINK -->
+            <a href="schedule.html" class="header-link">
+                <h2>Our Two-Part Wedding Story</h2>
+            </a>
             <p class="subtitle">Married in September, Celebrating in July!</p>
             <hr class="divider">
-            <p class="section-text">We are so thankful to have been joined to one another in an intimate ceremony on September 19, 2026.
-                <br>Because we want to celebrate this covenant with all of our favorite people, we are hosting a big wedding celebration in July 2027! We look forward with so much anticipation to celebrating our marriage vows and God's faithfulness with all of you in July 2027!</br>
+            <p class="section-text">
+                We are so thankful to have been joined to one another in an intimate ceremony on September 19, 2026.
+                <br><br>
+                Because we want to celebrate this covenant with all of our favorite people, we are hosting a big wedding celebration in July 2027! We look forward with so much anticipation to celebrating our marriage vows and God's faithfulness with all of you in July 2027!
+            </p>
             <hr class="divider">
-    </section>
+        </section>
         
         <!-- Our Story Section -->
-        <section id="story" class="info-section">
-            <h2>Our Story</h2>
+        <section id="story" class="info-section" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
+            <!-- REPLACE 'story.html' WITH YOUR PAGE LINK -->
+            <a href="story.html" class="header-link">
+                <h2>Our Story</h2>
+            </a>
             <p class="subtitle">A story written in His perfect timing</p>
             <hr class="divider">
         </section>
 
          <!-- Travel & Stay -->
-        <section id="story" class="info-section">
-            <h2>Travel & Stay</h2>
+        <section id="travel" class="info-section" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
+            <!-- REPLACE 'travel.html' WITH YOUR PAGE LINK -->
+            <a href="travel.html" class="header-link">
+                <h2>Travel & Stay</h2>
+            </a>
             <p class="subtitle">Your guide to our favorite places</p>
             <hr class="divider">
         </section>
 
          <!-- Registry -->
-        <section id="story" class="info-section">
-            <h2>Registry</h2>
+        <section id="registry" class="info-section" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
+            <!-- REPLACE 'registry.html' WITH YOUR PAGE LINK -->
+            <a href="registry.html" class="header-link">
+                <h2>Registry</h2>
+            </a>
             <p class="subtitle">With love and gratitude</p>
             <hr class="divider">
         </section>
 
         <!-- RSVP -->
-        <section id="story" class="info-section">
-            <h2>RSVP</h2>
-            <p class="subtitle">Please let us know if you'll be joining us for our summer celebration—we can’t wait to see you!</p>
+        <section id="rsvp" class="info-section" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
+            <!-- REPLACE THE LINK BELOW WITH YOUR RSVP LINK -->
+            <a href="https://mararugen.com/wedding-rsvp" target="_blank" class="header-link">
+                <h2>RSVP</h2>
+            </a>
+            <p class="subtitle" style="max-width: 600px; margin: 0 auto;">Please let us know if you'll be joining us for our summer celebration—we can’t wait to see you!</p>
             <hr class="divider">
         </section>
         
