@@ -76,9 +76,8 @@
             opacity: 0.9;
         }
 
-        /* Main solid section blocking out the parallax layer below it */
-        .travel-main-content,
-        .hotel-main-content {
+        /* Solid background section masking the parallax hero layer */
+        .travel-main-content {
             position: relative;
             z-index: 10;
             background-color: #faf9f6;
@@ -86,10 +85,13 @@
             text-align: center;
         }
 
-        /* Border divider between sections */
-        .hotel-main-content {
-            border-top: 1px solid rgba(223, 183, 108, 0.2);
-            padding-top: 40px;
+        /* Subtle dividing rules between sub-sections */
+        .travel-section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(223, 183, 108, 0.3);
+            max-width: 800px;
+            margin: 80px auto;
         }
 
         .lodging-title {
@@ -97,16 +99,25 @@
             font-size: 2.6rem;
             font-weight: 400;
             color: #dfb76c;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             letter-spacing: 1px;
         }
 
-        /* 3-Column Grid Structural Base */
+        /* Standard 3-Column Grid Base */
         .lodging-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 40px;
             max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Balanced 4-Column / 2x2 Grid for Attractions */
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px 40px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -115,7 +126,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: 20px 10px;
+            padding: 10px;
         }
 
         .category-label {
@@ -123,7 +134,7 @@
             font-size: 1.1rem;
             font-style: italic;
             color: #dfb76c;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             letter-spacing: 1px;
         }
 
@@ -134,16 +145,16 @@
             line-height: 1.8;
             font-weight: 300;
             color: #555555;
-            max-width: 280px;
+            max-width: 320px;
             margin: 0 auto;
         }
 
         .venue-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 400;
             color: #dfb76c;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         /* Custom Wide Gold Block Button */
@@ -169,6 +180,24 @@
             box-shadow: 0 5px 15px rgba(223, 183, 108, 0.3);
         }
 
+        /* Minimal text link for activities */
+        .activity-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #dfb76c;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .activity-link:hover {
+            border-bottom-color: #dfb76c;
+        }
+
         @keyframes travelImageScale {
             from { transform: scale(1.08); }
             to { transform: scale(1); }
@@ -176,7 +205,8 @@
 
         /* Responsive Breakpoints */
         @media (max-width: 900px) {
-            .lodging-grid {
+            .lodging-grid,
+            .attractions-grid {
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
@@ -221,67 +251,109 @@
         <div class="travel-hero-overlay"></div>
         <div class="travel-hero-content">
             <h1 class="travel-title">Travel & Stay</h1>
+            <p class="travel-subtitle">Information for our out-of-town guests</p>
         </div>
     </header>
 
-    <!-- Main Content Workspace -->
+    <!-- Main Content Area -->
     <main class="travel-main-content">
-        <!-- Air Travel Section -->
-        <h2 class="lodging-title">Airport Recommendations</h2>
-
-        <div class="lodging-grid">
-            <!-- Column 1: Idaho Falls -->
-            <div class="lodging-column">
-                <span class="category-label">Closest Airport</span>
-                <h3 class="venue-name">Idaho Falls (IDA)</h3>
-                <p class="lodging-text">30 minutes from the venue</p>
-            </div>
-
-            <!-- Column 2: Jackson Hole -->
-            <div class="lodging-column">
-                <span class="category-label">Scenic Option</span>
-                <h3 class="venue-name">Jackson Hole (JAC)</h3>
-                <p class="lodging-text">2 hours from the venue</p>
-            </div>
-
-            <!-- Column 3: Salt Lake City -->
-            <div class="lodging-column">
-                <span class="category-label">Major Hub</span>
-                <h3 class="venue-name">Salt Lake City (SLC)</h3>
-                <p class="lodging-text">3.5 hours from the venue</p>
-            </div>
-        </div>
-
-        <!-- Accommodations Section -->
-        <section class="hotel-main-content">
-            <h2 class="lodging-title">Where to Stay</h2>
+        
+        <!-- SECTION 1: AIRPORTS -->
+        <section>
+            <h2 class="lodging-title">Airport Recommendations</h2>
 
             <div class="lodging-grid">
-                <!-- Column 1 -->
                 <div class="lodging-column">
-                    <span class="category-label">Hotel Block</span>
-                    <h3 class="venue-name">Local Hotel</h3>
-                    <p class="lodging-text">Group rate available for guests.</p>
-                    <a href="#" class="lodging-cta">Book Hotel</a>
+                    <span class="category-label">Closest Airport</span>
+                    <h3 class="venue-name">Idaho Falls (IDA)</h3>
+                    <p class="lodging-text">30 minutes from the venue</p>
                 </div>
 
-                <!-- Column 2 -->
                 <div class="lodging-column">
-                    <span class="category-label">Boutique</span>
-                    <h3 class="venue-name">The Grand Lodge</h3>
-                    <p class="lodging-text">15 minutes from the venue.</p>
-                    <a href="#" class="lodging-cta">View Lodge</a>
+                    <span class="category-label">Scenic Option</span>
+                    <h3 class="venue-name">Jackson Hole (JAC)</h3>
+                    <p class="lodging-text">2 hours from the venue</p>
                 </div>
 
-                <!-- Column 3 -->
                 <div class="lodging-column">
-                    <span class="category-label">Cabins</span>
-                    <h3 class="venue-name">Mountain Cabins</h3>
-                    <p class="lodging-text">Great for groups and families.</p>
-                    <a href="#" class="lodging-cta">View Cabins</a>
+                    <span class="category-label">Major Hub</span>
+                    <h3 class="venue-name">Salt Lake City (SLC)</h3>
+                    <p class="lodging-text">3.5 hours from the venue</p>
                 </div>
             </div>
         </section>
+
+        <hr class="travel-section-divider">
+
+        <!-- SECTION 2: ACCOMMODATIONS -->
+        <section>
+            <h2 class="lodging-title">Where to Stay</h2>
+
+            <div class="lodging-grid">
+                <div class="lodging-column">
+                    <span class="category-label">Hotel Block</span>
+                    <h3 class="venue-name">Host Hotel</h3>
+                    <p class="lodging-text">Group rate available for guests using code GIGLIO.</p>
+                    <a href="#" class="lodging-cta">Book Hotel</a>
+                </div>
+
+                <div class="lodging-column">
+                    <span class="category-label">Boutique</span>
+                    <h3 class="venue-name">The Grand Lodge</h3>
+                    <p class="lodging-text">Scenic resort about 15 minutes from the venue.</p>
+                    <a href="#" class="lodging-cta">View Lodge</a>
+                </div>
+
+                <div class="lodging-column">
+                    <span class="category-label">Cabins</span>
+                    <h3 class="venue-name">Mountain Cabins</h3>
+                    <p class="lodging-text">Great option for groups and families staying together.</p>
+                    <a href="#" class="lodging-cta">View Rentals</a>
+                </div>
+            </div>
+        </section>
+
+        <hr class="travel-section-divider">
+
+        <!-- SECTION 3: THINGS TO DO -->
+        <section>
+            <h2 class="lodging-title">Things To Do</h2>
+
+            <div class="attractions-grid">
+                <!-- Yellowstone -->
+                <div class="lodging-column">
+                    <span class="category-label">Day Trip</span>
+                    <h3 class="venue-name">Yellowstone National Park</h3>
+                    <p class="lodging-text">Explore Old Faithful, Grand Prismatic Spring, and incredible wildlife (~2 hours to the West Entrance).</p>
+                    <a href="https://www.nps.gov/yell/index.htm" target="_blank" class="activity-link">Explore Park &rarr;</a>
+                </div>
+
+                <!-- Grand Teton -->
+                <div class="lodging-column">
+                    <span class="category-label">Outdoors & Hiking</span>
+                    <h3 class="venue-name">Grand Teton National Park</h3>
+                    <p class="lodging-text">Take in jagged mountain peaks, scenic drives, and serene boat trips on Jenny Lake.</p>
+                    <a href="https://www.nps.gov/grte/index.htm" target="_blank" class="activity-link">Explore Park &rarr;</a>
+                </div>
+
+                <!-- Idaho Falls River Walk -->
+                <div class="lodging-column">
+                    <span class="category-label">Local Stroll</span>
+                    <h3 class="venue-name">Idaho Falls River Walk</h3>
+                    <p class="lodging-text">A scenic 5-mile paved loop along the Snake River, cascading waterfalls, and local spots downtown.</p>
+                    <a href="https://visitidahofalls.com" target="_blank" class="activity-link">Learn More &rarr;</a>
+                </div>
+
+                <!-- Jackson Hole -->
+                <div class="lodging-column">
+                    <span class="category-label">Dining & Shopping</span>
+                    <h3 class="venue-name">Jackson Hole Town Square</h3>
+                    <p class="lodging-text">Visit the iconic elk antler arches, local western boutiques, art galleries, and restaurants.</p>
+                    <a href="https://www.jacksonhole.com" target="_blank" class="activity-link">Learn More &rarr;</a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
 </body>
