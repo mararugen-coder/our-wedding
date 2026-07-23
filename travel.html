@@ -16,7 +16,7 @@
         /* Custom Parallax & Column Styles for Travel Page */
         .travel-hero {
             position: relative;
-            height: 60vh; /* Shorter, elegant header height matching the screenshot */
+            height: 60vh;
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -49,7 +49,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 62, 80, 0.45); /* Elegant tinted shade screen */
+            background: rgba(44, 62, 80, 0.45);
             z-index: 1;
         }
 
@@ -77,7 +77,8 @@
         }
 
         /* Main solid section blocking out the parallax layer below it */
-        .travel-main-content {
+        .travel-main-content,
+        .hotel-main-content {
             position: relative;
             z-index: 10;
             background-color: #faf9f6;
@@ -85,11 +86,17 @@
             text-align: center;
         }
 
+        /* Border divider between sections */
+        .hotel-main-content {
+            border-top: 1px solid rgba(223, 183, 108, 0.2);
+            padding-top: 40px;
+        }
+
         .lodging-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.6rem;
             font-weight: 400;
-            color: #dfb76c; /* Warm luxury gold script color */
+            color: #dfb76c;
             margin-bottom: 60px;
             letter-spacing: 1px;
         }
@@ -120,13 +127,15 @@
             letter-spacing: 1px;
         }
 
-        .lodging-text {
+        .lodging-text,
+        .address-block {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
             line-height: 1.8;
             font-weight: 300;
             color: #555555;
             max-width: 280px;
+            margin: 0 auto;
         }
 
         .venue-name {
@@ -135,14 +144,6 @@
             font-weight: 400;
             color: #dfb76c;
             margin-bottom: 10px;
-        }
-
-        .address-block {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            font-weight: 300;
-            color: #555555;
         }
 
         /* Custom Wide Gold Block Button */
@@ -185,7 +186,7 @@
 </head>
 <body>
 
-    <!-- Premium Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <input type="checkbox" id="menu-toggle" class="menu-checkbox">
         
@@ -220,78 +221,68 @@
         <div class="travel-hero-overlay"></div>
         <div class="travel-hero-content">
             <h1 class="travel-title">Travel & Stay</h1>
-            <p class="travel-subtitle">Most events will be taking place nearby.</p>
         </div>
     </header>
 
-    <!-- Lower Content Workspace -->
+    <!-- Main Content Workspace -->
     <main class="travel-main-content">
-        <h2 class="airport-title">Airport Recommendations</h2>
-
-        <div class="lodging-grid">
-            <!-- Column 1: Idaho Falls, Idaho -->
-            <div class="airport-column">
-                <h3 class="airport-name">Idaho Falls Airport</h3>
-
-                <p class="airport-text">
-                    30 minutes from the venue
-                </p>
-            </div>
-
-            <!-- Column 2: Jackson, Wyoming -->
-            <div class="lodging-column">
-                <h3 class="venue-name">Jackson Hole Airport</h3>
-                <p class="address-block">
-                    2 hours from the venue
-                </p>
-            </div>
-
-            <!-- Column 3: Salt Lake City -->
-            <div class="lodging-column">
-                <span class="category-label">Cabin</span>
-                <h3 class="venue-name">Salt Lake City Airport</h3>
-                <p class="address-block">
-                    3.5 hours from the venue
-                </p>
-            </div>
-        </div>
-    </main>
-    
-    <main class="hotel-main-content">
+        <!-- Air Travel Section -->
         <h2 class="lodging-title">Airport Recommendations</h2>
 
         <div class="lodging-grid">
-            <!-- Column 1: Idaho Falls, Idaho -->
+            <!-- Column 1: Idaho Falls -->
             <div class="lodging-column">
-                <span class="category-label">Idaho Falls</span>
-                <h3 class="venue-name">Idaho Falls Airport</h3>
-
-                <p class="lodging-text">
-                    30 minutes from the venue
-                </p>
-                <a href="#" class="lodging-cta">View Lodging</a>
+                <span class="category-label">Closest Airport</span>
+                <h3 class="venue-name">Idaho Falls (IDA)</h3>
+                <p class="lodging-text">30 minutes from the venue</p>
             </div>
 
-            <!-- Column 2: Jackson, Wyoming -->
+            <!-- Column 2: Jackson Hole -->
             <div class="lodging-column">
-                <span class="category-label">Hotel</span>
-                <h3 class="venue-name">Jackson Hole Airport</h3>
-                <p class="address-block">
-                    2 hours from the venue
-                </p>
+                <span class="category-label">Scenic Option</span>
+                <h3 class="venue-name">Jackson Hole (JAC)</h3>
+                <p class="lodging-text">2 hours from the venue</p>
             </div>
 
             <!-- Column 3: Salt Lake City -->
             <div class="lodging-column">
-                <span class="category-label">Cabin</span>
-                <h3 class="venue-name">Salt Lake City Airport</h3>
-                <p class="address-block">
-                    3.5 hours from the venue
-                </p>
+                <span class="category-label">Major Hub</span>
+                <h3 class="venue-name">Salt Lake City (SLC)</h3>
+                <p class="lodging-text">3.5 hours from the venue</p>
             </div>
         </div>
-    </main>
 
+        <!-- Accommodations Section -->
+        <section class="hotel-main-content">
+            <h2 class="lodging-title">Where to Stay</h2>
+
+            <div class="lodging-grid">
+                <!-- Column 1 -->
+                <div class="lodging-column">
+                    <span class="category-label">Hotel Block</span>
+                    <h3 class="venue-name">Local Hotel</h3>
+                    <p class="lodging-text">Group rate available for guests.</p>
+                    <a href="#" class="lodging-cta">Book Hotel</a>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="lodging-column">
+                    <span class="category-label">Boutique</span>
+                    <h3 class="venue-name">The Grand Lodge</h3>
+                    <p class="lodging-text">15 minutes from the venue.</p>
+                    <a href="#" class="lodging-cta">View Lodge</a>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="lodging-column">
+                    <span class="category-label">Cabins</span>
+                    <h3 class="venue-name">Mountain Cabins</h3>
+                    <p class="lodging-text">Great for groups and families.</p>
+                    <a href="#" class="lodging-cta">View Cabins</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
