@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP | Daryl & Mara's Wedding</title>
+  <!-- Link your site's main CSS file here so headers and styling match -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PAGE CONTAINER -->
+  <main style="padding: 40px 20px;">
+    
+    <!-- PASTE YOUR RSVP CODE BLOCK HERE -->
+    <div id="wedding-rsvp-module" style="font-family: inherit; max-width: 480px; margin: 0 auto; padding: 20px; border: 1px solid #eee; background: #fff;">
+      
+      <!-- STATE 1: Search Form Panel -->
+      <div id="step-search">
+        <h3 style="text-align: center; margin-top: 0;">Find Your Invitation</h3>
+        <p style="text-align: center; font-size: 0.9em; color: #666;">Enter your name below to unlock your RSVP dashboard.</p>
+        <input type="text" id="input-first" placeholder="First Name" style="width:100%; padding:12px; margin-bottom:10px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit;">
+        <input type="text" id="input-last" placeholder="Last Name" style="width:100%; padding:12px; margin-bottom:15px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit;">
+        <button id="btn-search" onclick="executeSearch()" style="width:100%; padding:12px; background:#000; color:#fff; border:none; font-weight:bold; cursor:pointer; font-family:inherit;">Search Guest List</button>
+        <div id="msg-search-error" style="color:red; margin-top:12px; text-align:center; display:none; font-size:0.9em; font-weight:500;"></div>
+      </div>
+
+      <!-- STATE 2: RSVP Selection Panel -->
+      <div id="step-form" style="display:none;">
+        <h3 id="display-event-title" style="text-align: center; margin-top: 0;">Your RSVP Details</h3>
+        <p id="edit-notice" style="text-align:center; color:green; font-size:0.85em; display:none; margin-bottom:15px; font-weight:bold;">✨ We found your previous RSVP! You can modify your choices below.</p>
+        <form id="main-rsvp-form" onsubmit="executeSubmit(event)">
+          <div id="dynamic-household-rows"></div>
+          <div style="margin-top:20px;">
+            <label style="display:block; margin-bottom:6px; font-weight:bold; font-size:0.9em;">Dietary Restrictions / Food Allergies:</label>
+            <input type="text" id="input-dietary" placeholder="e.g., Gluten-free, Vegan, or N/A" style="width:100%; padding:12px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit; margin-bottom:15px;">
+          </div>
+          <div style="margin-bottom:20px; display:flex; align-items:flex-start;">
+            <input type="checkbox" id="chk-travel" style="margin-top:3px; margin-right:10px; width:16px; height:16px; cursor:pointer;">
+            <label for="chk-travel" style="font-size:0.95em; line-height:1.4; cursor:pointer;">I / We require coordination help with the logistics of our travel.</label>
+          </div>
+          <div>
+            <label style="display:block; margin-bottom:6px; font-weight:bold; font-size:0.9em;">Well Wishes or Notes for the Couple:</label>
+            <textarea id="txt-note" placeholder="Leave a note or message..." style="width:100%; height:90px; padding:12px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit; resize:vertical; margin-bottom:20px;"></textarea>
+          </div>
+          <button type="submit" id="btn-submit" style="width:100%; padding:12px; background:#000; color:#fff; border:none; font-weight:bold; cursor:pointer; font-family:inherit;">Update RSVP</button>
+        </form>
+        <div id="msg-submit-error" style="color:red; margin-top:12px; text-align:center; display:none; font-size:0.9em;"></div>
+      </div>
+
+      <!-- STATE 3: Success Confirmation State -->
+      <div id="step-success" style="display:none; text-align:center; padding:30px 10px;">
+        <h3 style="color: green; margin-top:0;">RSVP Saved Successfully!</h3>
+        <p>Thank you! Your choices have been saved. We can't wait to celebrate with you!💍🥂</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const GOOGLE_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyc688Fi09dGAJmuq83PZ79-9LMRheFbe6MKOSZxzt1mbwFmjsKSwHRbkycVw_JJH4s/exec";
+    let matchedMembers = [];
+
+    function executeSearch() {
+      const first = document.getElementById('input-first').value.trim();
+      const last = document.getElementById('input-last').value.trim();
+      const errBox = document.getElementById('msg-search-error');
+      const searchBtn = document.getElementById('btn-search');
+      
+      errBox.style.display = "none";
+      if(!first || !last) {
+        errBox.innerText = "Please provide both your first and last name.";
+        errBox.style.display = "block";
+        return;
+      }
+
+      searchBtn.innerText = "Searching Guest List...";
+      searchBtn.disabled = true;
+
+      fetch(`${GOOGLE_WEBAPP_URL}?firstName=${encodeURIComponent(first)}&lastName=${encodeURIComponent(last)}`)
+        .then(res => {
+          if(!res.ok) throw new Error("Network error");
+          return res.json();
+        })
+        .then(data => {
+          searchBtn.innerText = "Search Guest List";
+          searchBtn.disabled = false;
+
+          if (data.success) {
+            matchedMembers = data.members;
+            const titleElement = document.getElementById('display-event-title');
+            if(data.invitationType && data.invitationType.toLowerCase() === "intimate") {
+              titleElement.innerText = "RSVP: Intimate Ceremony & Reception";
+            } else {
+              titleElement.innerText = "RSVP: Celebration & Evening Reception";
+            }
+            
+            document.getElementById('input-dietary').value = data.dietary || "";
+            document.getElementById('chk-travel').checked = data.travelHelp || false;
+            document.getElementById('txt-note').value = data.note === "No note left" ? "" : (data.note || "");
+            
+            let hasPreviousResponse = false;
+            const container = document.getElementById('dynamic-household-rows');
+            container.innerHTML = "";
+            
+            matchedMembers.forEach((name, idx) => {
+              const previousStatus = (data.existingResponses && data.existingResponses[name]) || "";
+              if(previousStatus) hasPreviousResponse = true;
+
+              const wrapper = document.createElement('div');
+              wrapper.style.padding = "12px 0";
+              wrapper.style.borderBottom = "1px solid #f0f0f0";
+              wrapper.innerHTML = `
+                <p style="margin:0 0 8px 0; font-weight:bold;">${name}</p>
+                <label style="margin-right:20px; cursor:pointer;">
+                  <input type="radio" name="attend-${idx}" value="Attending" required style="margin-right:5px;" ${previousStatus === 'Attending' ? 'checked' : ''}>Accepts With Joy
+                </label>
+                <label style="cursor:pointer;">
+                  <input type="radio" name="attend-${idx}" value="Declining" style="margin-right:5px;" ${previousStatus === 'Declining' ? 'checked' : ''}>Declines with Regret
+                </label>
+              `;
+              container.appendChild(wrapper);
+            });
+
+            if(hasPreviousResponse) {
+              document.getElementById('edit-notice').style.display = "block";
+              document.getElementById('btn-submit').innerText = "Update My RSVP Options";
+            }
+
+            document.getElementById('step-search').style.display = "none";
+            document.getElementById('step-form').style.display = "block";
+          } else {
+            errBox.innerText = data.message;
+            errBox.style.display = "block";
+          }
+        })
+        .catch(err => {
+          searchBtn.innerText = "Search Guest List";
+          searchBtn.disabled = false;
+          errBox.innerText = "Connection Failed: Verify backend macro permissions.";
+          errBox.style.display = "block";
+        });
+    }
+
+    function executeSubmit(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById('btn-submit');
+      const errBox = document.getElementById('msg-submit-error');
+      errBox.style.display = "none";
+
+      const structuredResponses = [];
+      for(let i = 0; i < matchedMembers.length; i++) {
+        const selectedRadio = document.querySelector(`input[name="attend-${i}"]:checked`);
+        if(!selectedRadio) {
+          alert("Please select attendance for all household members.");
+          return;
+        }
+        structuredResponses.push({
+          name: matchedMembers[i],
+          attendance: selectedRadio.value
+        });
+      }
+
+      submitBtn.innerText = "Saving Responses...";
+      submitBtn.disabled = true;
+
+      const finalPayload = {
+        responses: structuredResponses,
+        dietary: document.getElementById('input-dietary').value.trim(),
+        travelHelp: document.getElementById('chk-travel').checked,
+        note: document.getElementById('txt-note').value.trim()
+      };
+
+      fetch(GOOGLE_WEBAPP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalPayload)
+      })
+      .then(() => {
+        document.getElementById('step-form').style.display = "none";
+        document.getElementById('step-success').style.display = "block";
+      })
+      .catch(err => {
+        submitBtn.innerText = "Update RSVP";
+        submitBtn.disabled = false;
+        errBox.innerText = "Could not deliver data. Verify permissions.";
+        errBox.style.display = "block";
+      });
+    }
+  </script>
+
+</body>
+</html>
