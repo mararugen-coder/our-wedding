@@ -18,16 +18,15 @@
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
       border: 1px solid #e2e8f0;
       color: #2c353d;
-      overflow: hidden; /* Ensures the header image respects top rounded corners */
+      overflow: hidden; /* Keeps photo within the top rounded card corners */
     }
 
-    /* VISUAL HERO HEADER ELEMENT */
+    /* VISUAL HERO HEADER ELEMENT WITH TETON PHOTO */
     .rsvp-hero-header {
       position: relative;
-      height: 180px;
-      /* Replace background image URL below with your preferred engagement photo path */
-      background: linear-gradient(to bottom, rgba(45, 59, 69, 0.3), rgba(45, 59, 69, 0.75)), 
-                  url('hero.jpg') center/cover no-repeat;
+      height: 220px; /* Framing for mountain background and couple */
+      background: linear-gradient(to bottom, rgba(45, 59, 69, 0.25), rgba(45, 59, 69, 0.7)), 
+                  url('DRW08142.jpg') center 35%/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -43,7 +42,7 @@
       font-weight: 400;
       letter-spacing: 1px;
       margin: 0;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
     .rsvp-hero-header p {
@@ -54,6 +53,7 @@
       margin-top: 6px !important;
       margin-bottom: 0 !important;
       font-weight: 500;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
     /* MODULE FORM BODY */
@@ -100,7 +100,7 @@
       box-shadow: 0 0 0 3px rgba(61, 79, 93, 0.15);
     }
 
-    /* Buttons styled to match your gold navbar RSVP CTA */
+    /* Buttons styled to match gold navbar RSVP CTA */
     #wedding-rsvp-module button {
       width: 100%;
       padding: 13px;
