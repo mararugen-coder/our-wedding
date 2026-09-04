@@ -4,61 +4,144 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RSVP | Daryl & Mara's Wedding</title>
-  <!-- Link your site's main CSS file here so headers and styling match -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* CUSTOM STYLES TO MATCH SITE PALETTE */
+    #wedding-rsvp-module {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      max-width: 480px;
+      margin: 40px auto;
+      padding: 35px 30px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      color: #2c353d;
+    }
+
+    /* Serif Heading matching "Celebrating the Giglios" */
+    #wedding-rsvp-module h3 {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: #2d3b45;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    #wedding-rsvp-module p {
+      color: #616e79;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Form Inputs with slate focus border */
+    #wedding-rsvp-module input[type="text"],
+    #wedding-rsvp-module textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background-color: #fafbfc;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    #wedding-rsvp-module input[type="text"]:focus,
+    #wedding-rsvp-module textarea:focus {
+      outline: none;
+      border-color: #3d4f5d;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(61, 79, 93, 0.15);
+    }
+
+    /* Buttons styled to match your gold navbar RSVP CTA */
+    #wedding-rsvp-module button {
+      width: 100%;
+      padding: 13px;
+      background-color: #dfc07e; /* Accent Gold */
+      color: #1a232a;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    #wedding-rsvp-module button:hover {
+      background-color: #d1b06a;
+    }
+
+    #wedding-rsvp-module button:active {
+      transform: scale(0.99);
+    }
+
+    /* Checkbox & radio accent colors */
+    #wedding-rsvp-module input[type="radio"],
+    #wedding-rsvp-module input[type="checkbox"] {
+      accent-color: #3d4f5d;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- PAGE CONTAINER -->
   <main style="padding: 40px 20px;">
     
-    <!-- PASTE YOUR RSVP CODE BLOCK HERE -->
-    <div id="wedding-rsvp-module" style="font-family: inherit; max-width: 480px; margin: 0 auto; padding: 20px; border: 1px solid #eee; background: #fff;">
+    <div id="wedding-rsvp-module">
       
-      <!-- STATE 1: Search Form Panel -->
       <div id="step-search">
-        <h3 style="text-align: center; margin-top: 0;">Find Your Invitation</h3>
-        <p style="text-align: center; font-size: 0.9em; color: #666;">Enter your name below to unlock your RSVP dashboard.</p>
-        <input type="text" id="input-first" placeholder="First Name" style="width:100%; padding:12px; margin-bottom:10px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit;">
-        <input type="text" id="input-last" placeholder="Last Name" style="width:100%; padding:12px; margin-bottom:15px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit;">
-        <button id="btn-search" onclick="executeSearch()" style="width:100%; padding:12px; background:#000; color:#fff; border:none; font-weight:bold; cursor:pointer; font-family:inherit;">Search Guest List</button>
-        <div id="msg-search-error" style="color:red; margin-top:12px; text-align:center; display:none; font-size:0.9em; font-weight:500;"></div>
+        <h3>Find Your Invitation</h3>
+        <p style="text-align: center; margin-bottom: 20px;">Enter your name below to unlock your RSVP dashboard.</p>
+        <input type="text" id="input-first" placeholder="First Name" style="margin-bottom: 12px;">
+        <input type="text" id="input-last" placeholder="Last Name" style="margin-bottom: 18px;">
+        <button id="btn-search" onclick="executeSearch()">Search Guest List</button>
+        <div id="msg-search-error" style="color: #dc2626; margin-top: 12px; text-align: center; display: none; font-size: 0.9em; font-weight: 500;"></div>
       </div>
 
-      <!-- STATE 2: RSVP Selection Panel -->
-      <div id="step-form" style="display:none;">
-        <h3 id="display-event-title" style="text-align: center; margin-top: 0;">Your RSVP Details</h3>
-        <p id="edit-notice" style="text-align:center; color:green; font-size:0.85em; display:none; margin-bottom:15px; font-weight:bold;">✨ We found your previous RSVP! You can modify your choices below.</p>
+      <div id="step-form" style="display: none;">
+        <h3 id="display-event-title">Your RSVP Details</h3>
+        <p id="edit-notice" style="text-align: center; color: #16a34a; font-size: 0.85em; display: none; margin-bottom: 15px; font-weight: 600;">✨ We found your previous RSVP! You can modify your choices below.</p>
+        
         <form id="main-rsvp-form" onsubmit="executeSubmit(event)">
           <div id="dynamic-household-rows"></div>
-          <div style="margin-top:20px;">
-            <label style="display:block; margin-bottom:6px; font-weight:bold; font-size:0.9em;">Dietary Restrictions / Food Allergies:</label>
-            <input type="text" id="input-dietary" placeholder="e.g., Gluten-free, Vegan, or N/A" style="width:100%; padding:12px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit; margin-bottom:15px;">
+          
+          <div style="margin-top: 20px;">
+            <label style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.88em; color: #334155;">Dietary Restrictions / Food Allergies:</label>
+            <input type="text" id="input-dietary" placeholder="e.g., Gluten-free, Vegan, or N/A" style="margin-bottom: 16px;">
           </div>
-          <div style="margin-bottom:20px; display:flex; align-items:flex-start;">
-            <input type="checkbox" id="chk-travel" style="margin-top:3px; margin-right:10px; width:16px; height:16px; cursor:pointer;">
-            <label for="chk-travel" style="font-size:0.95em; line-height:1.4; cursor:pointer;">I / We require coordination help with the logistics of our travel.</label>
+          
+          <div style="margin-bottom: 20px; display: flex; align-items: flex-start;">
+            <input type="checkbox" id="chk-travel" style="margin-top: 3px; margin-right: 10px; width: 16px; height: 16px; cursor: pointer;">
+            <label for="chk-travel" style="font-size: 0.9em; line-height: 1.4; cursor: pointer; color: #475569;">I / We require coordination help with the logistics of our travel.</label>
           </div>
+          
           <div>
-            <label style="display:block; margin-bottom:6px; font-weight:bold; font-size:0.9em;">Well Wishes or Notes for the Couple:</label>
-            <textarea id="txt-note" placeholder="Leave a note or message..." style="width:100%; height:90px; padding:12px; box-sizing:border-box; border:1px solid #ccc; font-family:inherit; resize:vertical; margin-bottom:20px;"></textarea>
+            <label style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.88em; color: #334155;">Well Wishes or Notes for the Couple:</label>
+            <textarea id="txt-note" placeholder="Leave a note or message..." style="height: 90px; resize: vertical; margin-bottom: 20px;"></textarea>
           </div>
-          <button type="submit" id="btn-submit" style="width:100%; padding:12px; background:#000; color:#fff; border:none; font-weight:bold; cursor:pointer; font-family:inherit;">Update RSVP</button>
+          
+          <button type="submit" id="btn-submit">Update RSVP</button>
         </form>
-        <div id="msg-submit-error" style="color:red; margin-top:12px; text-align:center; display:none; font-size:0.9em;"></div>
+        <div id="msg-submit-error" style="color: #dc2626; margin-top: 12px; text-align: center; display: none; font-size: 0.9em;"></div>
       </div>
 
-      <!-- STATE 3: Success Confirmation State -->
-      <div id="step-success" style="display:none; text-align:center; padding:30px 10px;">
-        <h3 style="color: green; margin-top:0;">RSVP Saved Successfully!</h3>
-        <p>Thank you! Your choices have been saved. We can't wait to celebrate with you!💍🥂</p>
+      <div id="step-success" style="display: none; text-align: center; padding: 20px 10px;">
+        <h3 style="color: #2d3b45; margin-top: 0;">RSVP Saved Successfully!</h3>
+        <p style="margin-top: 10px;">Thank you! Your choices have been saved. We can't wait to celebrate with you! 💍🥂</p>
       </div>
 
     </div>
 
   </main>
 
-  <!-- JAVASCRIPT LOGIC -->
   <script>
     const GOOGLE_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyc688Fi09dGAJmuq83PZ79-9LMRheFbe6MKOSZxzt1mbwFmjsKSwHRbkycVw_JJH4s/exec";
     let matchedMembers = [];
@@ -110,15 +193,15 @@
               if(previousStatus) hasPreviousResponse = true;
 
               const wrapper = document.createElement('div');
-              wrapper.style.padding = "12px 0";
-              wrapper.style.borderBottom = "1px solid #f0f0f0";
+              wrapper.style.padding = "14px 0";
+              wrapper.style.borderBottom = "1px solid #f1f5f9";
               wrapper.innerHTML = `
-                <p style="margin:0 0 8px 0; font-weight:bold;">${name}</p>
-                <label style="margin-right:20px; cursor:pointer;">
-                  <input type="radio" name="attend-${idx}" value="Attending" required style="margin-right:5px;" ${previousStatus === 'Attending' ? 'checked' : ''}>Accepts With Joy
+                <p style="margin:0 0 8px 0; font-weight:600; color:#2d3b45; font-size:0.95em;">${name}</p>
+                <label style="margin-right:20px; cursor:pointer; font-size:0.9em; color:#475569;">
+                  <input type="radio" name="attend-${idx}" value="Attending" required style="margin-right:6px;" ${previousStatus === 'Attending' ? 'checked' : ''}>Accepts With Joy
                 </label>
-                <label style="cursor:pointer;">
-                  <input type="radio" name="attend-${idx}" value="Declining" style="margin-right:5px;" ${previousStatus === 'Declining' ? 'checked' : ''}>Declines with Regret
+                <label style="cursor:pointer; font-size:0.9em; color:#475569;">
+                  <input type="radio" name="attend-${idx}" value="Declining" style="margin-right:6px;" ${previousStatus === 'Declining' ? 'checked' : ''}>Declines with Regret
                 </label>
               `;
               container.appendChild(wrapper);
